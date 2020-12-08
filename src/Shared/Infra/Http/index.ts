@@ -2,6 +2,8 @@ import 'dotenv/config';
 
 import express from 'express';
 
+import '../../Containers';
+
 import TypeORM from '../TypeORM';
 
 const app = express();
