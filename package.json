@@ -1,7 +1,7 @@
 {
   "name": "wellets-backend",
   "version": "1.0.0",
-  "description": "Manage your money placed in many wallets and with different currencies",
+  "description": "Manage your money with different wallets and different currencies",
   "repository": "git@github.com:stemDaniel/wellets-backend.git",
   "author": "Daniel Oliveira <oficial.danieloliveira@gmail.com>",
   "license": "MIT",
