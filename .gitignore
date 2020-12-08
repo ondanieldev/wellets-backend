@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Docker container credentials
+docker-compose.yml
+
+# TypeORM database credentials
+ormconfig.json

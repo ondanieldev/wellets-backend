@@ -1,13 +1,17 @@
 {
   "name": "wellets-backend",
   "version": "1.0.0",
-  "description": "Manage your money placed in many wallets and with different currencies",
+  "description": "Manage your money with different wallets and different currencies",
   "repository": "git@github.com:stemDaniel/wellets-backend.git",
   "author": "Daniel Oliveira <oficial.danieloliveira@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore node_modules ./src/Shared/Infra/Http/index.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore node_modules ./src/Shared/Infra/Http/index.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "create-migration": "yarn typeorm migration:create -n",
+    "run-migrations": "yarn typeorm migration:run",
+    "revert-last-migration": "yarn typeorm migration:revert"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
@@ -24,6 +28,9 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "typeorm": "^0.2.29"
   }
 }
