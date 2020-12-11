@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "typeRoots": ["src/@types", "node_modules/@types", "./src/@types", "./@types"],
+    "typeRoots": ["./@types", "./src/@types", "@types", "node_modules/@types"],
     "baseUrl": "./src"
   }
 }
