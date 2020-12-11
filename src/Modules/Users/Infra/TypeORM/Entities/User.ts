@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import Wallet from 'Modules/Wallets/Infra/TypeORM/Entities/Wallet';
 
@@ -18,7 +19,11 @@ class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
+
+  @Column({ nullable: true })
+  token?: string;
 
   @CreateDateColumn()
   created_at: Date;
