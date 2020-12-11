@@ -1,9 +1,5 @@
-import { container } from 'tsyringe';
+// Modules containers
+import 'Modules/Users/Containers';
 
-import IUsersRepository from 'Modules/Users/Repositories/IUsersRepository';
-import UsersRepository from 'Modules/Users/Infra/TypeORM/Repositories/UsersRepository';
-
-container.registerSingleton<IUsersRepository>(
-  'UsersRepository',
-  UsersRepository,
-);
+// Shared containers
+import './HashProvider';
