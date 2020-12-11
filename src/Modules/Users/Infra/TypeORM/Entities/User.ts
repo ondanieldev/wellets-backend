@@ -22,6 +22,9 @@ class User {
   @Exclude()
   password: string;
 
+  @Column({ nullable: true })
+  token?: string;
+
   @CreateDateColumn()
   created_at: Date;
 

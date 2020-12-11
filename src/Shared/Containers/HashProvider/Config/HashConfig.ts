@@ -6,7 +6,7 @@ interface IHashConfig {
 }
 
 export default {
-  driver: 'bcrypt',
+  driver: process.env.HASH_DRIVER,
   bcrypt: {
     salt: 8,
   },
