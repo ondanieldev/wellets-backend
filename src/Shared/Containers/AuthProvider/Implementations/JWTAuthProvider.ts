@@ -26,8 +26,6 @@ class JWTAuthProvider implements IAuthProvider {
 
       const payload = decode(token);
 
-      console.log(payload);
-
       return payload as ITokenPayload;
     } catch {
       throw new AppError('Invalid JWT token!');
