@@ -28,3 +28,15 @@
 **BUSINESS RULES**
 
 - [x] it is not possible to sign in with an invalid email and password;
+
+# [ CURRENCIES ]
+
+## Update currencies rates
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the system must automatically update currency rates every hour;
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] a migration must be runned to create the currencies at the beginning of the project;
