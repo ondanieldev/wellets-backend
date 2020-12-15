@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import User from 'Modules/Users/Infra/TypeORM/Entities/User';
@@ -19,7 +20,7 @@ class Wallet {
   alias: string;
 
   @Column({ type: 'decimal', default: 0 })
-  balance: string;
+  balance: number;
 
   @Column('uuid')
   user_id: string;
@@ -34,9 +35,11 @@ class Wallet {
   updated_at: Date;
 
   @ManyToOne(() => User, user => user.wallets)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Currency, currency => currency.wallets)
+  @JoinColumn({ name: 'currency_id' })
   currency: Currency;
 }
 
