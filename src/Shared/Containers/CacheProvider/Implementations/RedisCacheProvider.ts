@@ -15,8 +15,12 @@ class RedisCacheProvider implements ICacheProvider {
     });
   }
 
-  public async save<T>(key: string, value: T): Promise<void> {
-    await this.redisClient.set(key, JSON.stringify(value));
+  public async save<T>(
+    key: string,
+    value: T,
+    expires = 10 * 60,
+  ): Promise<void> {
+    await this.redisClient.set(key, JSON.stringify(value), 'ex', expires);
   }
 
   public async find<T>(key: string): Promise<T | null> {
