@@ -50,33 +50,33 @@
 
 - [x] the user must be able to create a wallet;
 
-**BUSINESS RULE**
+**BUSINESS RULES**
 
 - [x] the user must be authenticated;
 - [x] the user cannot have two wallets with the same alias;
 - [x] the wallet must have a valid currency;
+- [x] the balance must be positive;
 
 ## Index user wallets
 
 **FUNCTIONAL REQUIREMENTS**
 
-- [ ] the user must be able to index all their wallets;
+- [x] the user must be able to index all their wallets;
 
 **BUSINESS RULES**
 
-- [ ] the user must be authenticated;
+- [x] the user must be authenticated;
 
 ## Delete wallet
 
 **FUNCTIONAL REQUIREMENTS**
 
-- [ ] the user must be able to delete a wallet;
+- [x] the user must be able to delete a wallet;
 
 **BUSINESS RULES**
 
-- [ ] the user must be authenticated;
-- [ ] only the owner can delete a wallet;
-- [ ] the balance must be positive;
+- [x] the user must be authenticated;
+- [x] only the owner can delete their wallet;
 
 # [ ROAD MAP ]
 
