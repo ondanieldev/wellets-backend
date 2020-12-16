@@ -5,6 +5,7 @@ interface ICurrenciesRepository {
   create(data: ICreateCurrencyDTO): Promise<Currency>;
   findByAcronym(acronym: string): Promise<Currency | undefined>;
   save(currency: Currency): Promise<Currency>;
+  findById(id: string): Promise<Currency | undefined>;
 }
 
 export default ICurrenciesRepository;

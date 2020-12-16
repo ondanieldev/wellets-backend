@@ -54,7 +54,7 @@ export default class CreateTableWallets1607396041641
     await queryRunner.createForeignKey(
       'wallets',
       new TableForeignKey({
-        name: 'WalletUserID',
+        name: 'user_id',
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
@@ -66,7 +66,7 @@ export default class CreateTableWallets1607396041641
     await queryRunner.createForeignKey(
       'wallets',
       new TableForeignKey({
-        name: 'WalletCurrencyID',
+        name: 'currency_id',
         columnNames: ['currency_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'currencies',
@@ -77,8 +77,8 @@ export default class CreateTableWallets1607396041641
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('wallets', 'WalletCurrencyID');
-    await queryRunner.dropForeignKey('wallets', 'WalletUserID');
+    await queryRunner.dropForeignKey('wallets', 'currency_id');
+    await queryRunner.dropForeignKey('wallets', 'user_id');
     await queryRunner.dropTable('wallets');
   }
 }

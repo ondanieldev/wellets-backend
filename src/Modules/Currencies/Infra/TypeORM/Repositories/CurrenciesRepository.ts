@@ -35,6 +35,16 @@ class CurrenciesRepository implements ICurrenciesRepository {
 
     return currency;
   }
+
+  public async findById(id: string): Promise<Currency | undefined> {
+    const currency = await this.ormRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return currency;
+  }
 }
 
 export default CurrenciesRepository;

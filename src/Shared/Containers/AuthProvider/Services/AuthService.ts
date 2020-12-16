@@ -33,7 +33,7 @@ class AuthService {
     const user = await this.usersRepository.findById(sub);
 
     if (!user || user.token !== token) {
-      throw new AppError('Invalid JWT token!');
+      throw new AppError('Invalid JWT token!', 401);
     }
 
     return user;
