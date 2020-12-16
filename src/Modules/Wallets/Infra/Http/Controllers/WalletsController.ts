@@ -24,7 +24,7 @@ class WalletsController {
       balance,
     });
 
-    return response.json(wallet);
+    return response.status(201).json(wallet);
   }
 
   public async index(
@@ -57,7 +57,7 @@ class WalletsController {
       wallet_id,
     });
 
-    return response.json(wallets);
+    return response.status(204).json(wallets);
   }
 }
 
