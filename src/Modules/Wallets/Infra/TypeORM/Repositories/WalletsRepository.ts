@@ -33,6 +33,30 @@ class WalletsRepository implements IWalletsRepository {
 
     return wallet;
   }
+
+  public async findByUserId(user_id: string): Promise<Wallet[]> {
+    const wallets = await this.ormRepository.find({
+      where: {
+        user_id,
+      },
+    });
+
+    return wallets;
+  }
+
+  public async findById(id: string): Promise<Wallet> {
+    const wallet = await this.ormRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return wallet;
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
 
 export default WalletsRepository;
