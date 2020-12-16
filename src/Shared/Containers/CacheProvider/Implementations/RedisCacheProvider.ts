@@ -11,6 +11,7 @@ class RedisCacheProvider implements ICacheProvider {
 
     this.redisClient = new IORedis({
       port: redis.port,
+      password: redis.password,
     });
   }
 

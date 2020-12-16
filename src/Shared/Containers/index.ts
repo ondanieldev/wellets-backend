@@ -5,5 +5,6 @@ import 'Modules/Wallets/Containers';
 
 // Shared containers
 import './AuthProvider';
+import './CacheProvider';
 import './HashProvider';
 import './RatesProvider';
