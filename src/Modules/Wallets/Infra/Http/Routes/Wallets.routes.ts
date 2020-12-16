@@ -20,5 +20,16 @@ walletsRoutes.post(
   }),
   walletsController.create,
 );
+walletsRoutes.get('/', authController.on, walletsController.index);
+walletsRoutes.delete(
+  '/:wallet_id',
+  authController.on,
+  celebrate({
+    [Segments.PARAMS]: {
+      wallet_id: Joi.string().required(),
+    },
+  }),
+  walletsController.delete,
+);
 
 export default walletsRoutes;
