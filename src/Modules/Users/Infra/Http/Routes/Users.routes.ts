@@ -1,14 +1,17 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
+import AuthController from 'Shared/Containers/AuthProvider/Controllers/AuthController';
 import UsersController from '../Controllers/UsersController';
 import SessionsController from '../Controllers/SessionsController';
 
 const usersRoutes = Router();
 
+const authController = new AuthController();
 const usersController = new UsersController();
 const sessionsController = new SessionsController();
 
+// Public routes
 usersRoutes.post(
   '/signup',
   celebrate({
@@ -19,7 +22,6 @@ usersRoutes.post(
   }),
   usersController.create,
 );
-
 usersRoutes.post(
   '/signin',
   celebrate({
@@ -30,5 +32,9 @@ usersRoutes.post(
   }),
   sessionsController.create,
 );
+
+// Private routes
+usersRoutes.use(authController.on);
+usersRoutes.delete('/signout', sessionsController.delete);
 
 export default usersRoutes;
