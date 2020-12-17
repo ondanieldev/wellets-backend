@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
-import CreateTransaction from '../../../Services/CreateTransaction';
+import CreateTransactionService from '../../../Services/CreateTransactionService';
 
 class TransactionsController {
   public async create(
@@ -12,7 +12,7 @@ class TransactionsController {
     const { user } = request;
     const { description, value, wallet_id } = request.body;
 
-    const createTransaction = container.resolve(CreateTransaction);
+    const createTransaction = container.resolve(CreateTransactionService);
 
     const transaction = await createTransaction.execute({
       user_id: user.id,
