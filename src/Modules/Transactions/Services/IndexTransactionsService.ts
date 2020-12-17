@@ -1,7 +1,8 @@
-import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
-import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
-import AppError from 'Shared/Errors/AppError';
 import { injectable, inject } from 'tsyringe';
+
+import AppError from 'Shared/Errors/AppError';
+import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
+import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
 import Transaction from '../Infra/TypeORM/Entities/Transaction';
 import ITransactionsRepository from '../Repositories/ITransactionsRepository';
 
