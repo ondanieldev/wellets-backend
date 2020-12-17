@@ -8,9 +8,9 @@ const walletsRoutes = Router();
 const authController = new AuthController();
 const walletsController = new WalletsController();
 
+walletsRoutes.use(authController.on);
 walletsRoutes.post(
   '/',
-  authController.on,
   celebrate({
     [Segments.BODY]: {
       alias: Joi.string().required(),
@@ -20,10 +20,9 @@ walletsRoutes.post(
   }),
   walletsController.create,
 );
-walletsRoutes.get('/', authController.on, walletsController.index);
+walletsRoutes.get('/', walletsController.index);
 walletsRoutes.delete(
   '/:wallet_id',
-  authController.on,
   celebrate({
     [Segments.PARAMS]: {
       wallet_id: Joi.string().required(),
