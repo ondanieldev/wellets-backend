@@ -4,7 +4,7 @@
 
 **FUNCTIONAL REQUIREMENTS**
 
-- [x] the user must be able to register;
+- [x] the user must be able to sign up;
 
 **NON-FUNCTIONAL REQUIREMENTS**
 
@@ -13,7 +13,7 @@
 
 **BUSINESS RULES**
 
-- [x] it is not possible to register with an email that is already in use;
+- [x] it is not possible to sign up with an email that is already in use;
 - [x] the password must be greater than or equal to 6 characters;
 
 ## Sign in
@@ -29,6 +29,21 @@
 **BUSINESS RULES**
 
 - [x] it is not possible to sign in with an invalid email and password;
+
+## Sign out
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to sign out;
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] the user's token must be deleted from the database;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the user cannot log out another user;
 
 # [ CURRENCIES ]
 
@@ -114,6 +129,5 @@
 
 # [ ROAD MAP ]
 
-- [ ] users: log out;
 - [ ] currencies: log syncs;
 - [ ] currencies: index currencies;
