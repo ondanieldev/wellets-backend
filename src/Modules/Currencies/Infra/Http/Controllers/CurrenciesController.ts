@@ -1,32 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
-import CreateCurrenciesService from '../../../Services/CreateCurrenciesService';
-import UpdateCurrenciesService from '../../../Services/UpdateCurrenciesService';
+import IndexCurrenciesService from '../../../Services/IndexCurrenciesService';
 
 class CurrenciesController {
-  public async create(
+  public async index(
     request: Request,
     response: Response,
     _: NextFunction,
   ): Promise<Response> {
-    const createCurrencies = container.resolve(CreateCurrenciesService);
+    const indexCurrencies = container.resolve(IndexCurrenciesService);
 
-    await createCurrencies.execute();
+    const currencies = await indexCurrencies.execute();
 
-    return response.status(201).json();
-  }
-
-  public async update(
-    request: Request,
-    response: Response,
-    _: NextFunction,
-  ): Promise<Response> {
-    const updateCurrencies = container.resolve(UpdateCurrenciesService);
-
-    await updateCurrencies.execute();
-
-    return response.status(201).json();
+    return response.status(200).json(currencies);
   }
 }
 
