@@ -1,5 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
+import log from 'Shared/Helpers/log';
 import IRatesProvider from 'Shared/Containers/RatesProvider/Models/IRatesProvider';
 import ICurrenciesRepository from '../Repositories/ICurrenciesRepository';
 
@@ -25,6 +26,8 @@ class UpdateCurrenciesService {
         await this.currenciesRepository.save(currency);
       }
     });
+
+    log('Currencies rates updated *-*', 'blue');
   }
 }
 

@@ -134,8 +134,3 @@
 - [x] the user must be authenticated;
 - [x] the wallet must exist;
 - [x] the user must be the owner of the wallet;
-
-# [ ROAD MAP ]
-
-- [ ] currencies: log syncs;
-- [ ] currencies: index currencies;
