@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
 import AppError from 'Shared/Errors/AppError';
+import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
 import Transaction from '../Infra/TypeORM/Entities/Transaction';
 import ICreateTransactionDTO from '../DTOs/ICreateTransactionDTO';
 import ITransactionsRepository from '../Repositories/ITransactionsRepository';
@@ -18,6 +19,9 @@ class CreateTransaction {
 
     @inject('WalletsRepository')
     private walletsRepository: IWalletsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -41,6 +45,8 @@ class CreateTransaction {
       value,
       wallet_id,
     });
+
+    this.cacheProvider.delete(`transactions:${wallet_id}`);
 
     return transaction;
   }
