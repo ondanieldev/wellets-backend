@@ -20,5 +20,14 @@ transactionsRouter.post(
   }),
   transactionsController.create,
 );
+transactionsRouter.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      wallet_id: Joi.string().uuid().required(),
+    },
+  }),
+  transactionsController.index,
+);
 
 export default transactionsRouter;

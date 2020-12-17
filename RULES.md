@@ -98,6 +98,20 @@
 
 ## Index wallet transactions
 
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to list all transactions of their wallet;
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] the list must be cached;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the wallet must exist;
+- [x] the user must be the owner of the wallet;
+
 # [ ROAD MAP ]
 
 - [ ] users: log out;

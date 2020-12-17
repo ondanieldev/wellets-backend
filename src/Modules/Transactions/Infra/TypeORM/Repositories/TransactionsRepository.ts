@@ -19,6 +19,16 @@ class TransactionsRepository implements ITransactionsRepository {
 
     return transaction;
   }
+
+  public async findByWalletId(wallet_id: string): Promise<Transaction[]> {
+    const transactions = await this.ormRepository.find({
+      where: {
+        wallet_id,
+      },
+    });
+
+    return transactions;
+  }
 }
 
 export default TransactionsRepository;
