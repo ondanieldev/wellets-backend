@@ -63,6 +63,10 @@
 
 - [x] the user must be able to index all their wallets;
 
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] wallets list must be cached;
+
 **BUSINESS RULES**
 
 - [x] the user must be authenticated;
@@ -77,6 +81,22 @@
 
 - [x] the user must be authenticated;
 - [x] only the owner can delete their wallet;
+
+# [ TRANSACTIONS ]
+
+## Add or remove money from wallet
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to add or remove money from their wallet through a transaction;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the wallet must exist;
+- [x] the user must be the owner of the wallet;
+
+## Index wallet transactions
 
 # [ ROAD MAP ]
 

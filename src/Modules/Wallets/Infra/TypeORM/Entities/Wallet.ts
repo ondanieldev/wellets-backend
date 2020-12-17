@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import User from 'Modules/Users/Infra/TypeORM/Entities/User';
 import Currency from 'Modules/Currencies/Infra/TypeORM/Entities/Currency';
+import Transaction from 'Modules/Transactions/Infra/TypeORM/Entities/Transaction';
 
 @Entity('wallets')
 class Wallet {
@@ -41,6 +43,9 @@ class Wallet {
   @ManyToOne(() => Currency, currency => currency.wallets)
   @JoinColumn({ name: 'currency_id' })
   currency: Currency;
+
+  @OneToMany(() => Transaction, transaction => transaction.wallet)
+  transactions: Transaction[];
 }
 
 export default Wallet;
