@@ -3,6 +3,7 @@ import { EntityRepository, Repository, getRepository } from 'typeorm';
 import Currency from '../Entities/Currency';
 import ICreateCurrencyDTO from '../../../DTOs/ICreateCurrencyDTO';
 import ICurrenciesRepository from '../../../Repositories/ICurrenciesRepository';
+import currenciesRoutes from '../../Http/Routes/Currencies.routes';
 
 @EntityRepository(Currency)
 class CurrenciesRepository implements ICurrenciesRepository {
@@ -44,6 +45,12 @@ class CurrenciesRepository implements ICurrenciesRepository {
     });
 
     return currency;
+  }
+
+  public async find(): Promise<Currency[]> {
+    const currencies = await this.ormRepository.find();
+
+    return currencies;
   }
 }
 

@@ -6,6 +6,7 @@ interface ICurrenciesRepository {
   findByAcronym(acronym: string): Promise<Currency | undefined>;
   save(currency: Currency): Promise<Currency>;
   findById(id: string): Promise<Currency | undefined>;
+  find(): Promise<Currency[]>;
 }
 
 export default ICurrenciesRepository;

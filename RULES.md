@@ -47,15 +47,23 @@
 
 # [ CURRENCIES ]
 
-## Update currencies rates
-
-**FUNCTIONAL REQUIREMENTS**
-
-- [x] the system must automatically update currency rates every hour;
+## Create currencies
 
 **NON-FUNCTIONAL REQUIREMENTS**
 
 - [x] a migration must be runned to create the currencies at the beginning of the project;
+
+## Update currencies rates
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] the system must automatically update currency rates every hour;
+
+## Index currencies
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to index all currencies to be able to attach any of them their wallet;
 
 # [ WALLETS ]
 
