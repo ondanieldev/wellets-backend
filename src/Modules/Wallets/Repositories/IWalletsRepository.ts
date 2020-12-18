@@ -10,6 +10,7 @@ interface IWalletsRepository {
   findByUserId(user_id: string): Promise<Wallet[]>;
   findById(id: string): Promise<Wallet | undefined>;
   delete(id: string): Promise<void>;
+  save(wallet: Wallet): Promise<Wallet>;
 }
 
 export default IWalletsRepository;

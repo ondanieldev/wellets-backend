@@ -1,7 +1,7 @@
+import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
 import AppError from 'Shared/Errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
-import Wallet from '../Infra/TypeORM/Entities/Wallet';
 import IWalletsRepository from '../Repositories/IWalletsRepository';
 
 interface IRequest {
@@ -14,6 +14,9 @@ class DeleteWalletsService {
   constructor(
     @inject('WalletsRepository')
     private walletsRepository: IWalletsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({ wallet_id, user_id }: IRequest): Promise<void> {
@@ -28,6 +31,8 @@ class DeleteWalletsService {
     }
 
     await this.walletsRepository.delete(wallet_id);
+
+    this.cacheProvider.delete(`wallets:${user_id}`);
   }
 }
 

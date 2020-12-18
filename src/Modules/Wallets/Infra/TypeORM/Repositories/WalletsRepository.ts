@@ -57,6 +57,12 @@ class WalletsRepository implements IWalletsRepository {
   public async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
+
+  public async save(wallet: Wallet): Promise<Wallet> {
+    await this.ormRepository.save(wallet);
+
+    return wallet;
+  }
 }
 
 export default WalletsRepository;

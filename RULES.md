@@ -118,12 +118,45 @@
 - [x] the user must be authenticated;
 - [x] the wallet must exist;
 - [x] the user must be the owner of the wallet;
+- [ ] the wallet balance must be updated;
 
 ## Index wallet transactions
 
 **FUNCTIONAL REQUIREMENTS**
 
 - [x] the user must be able to list all transactions of their wallet;
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] the list must be cached;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the wallet must exist;
+- [x] the user must be the owner of the wallet;
+
+# [ CONVERSIONS ]
+
+## Create conversion between two wallets
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to set up a conversion between two of their wallets;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the wallets must exist;
+- [x] the user must be the owner of the both wallets;
+- [x] rates must be positive values;
+- [x] it is not possible to create another conversion between the same wallets with the same positions;
+
+## Index wallet conversions
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to list all conversions that involves their wallet;
 
 **NON-FUNCTIONAL REQUIREMENTS**
 

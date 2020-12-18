@@ -46,7 +46,11 @@ class CreateTransaction {
       wallet_id,
     });
 
+    Object.assign(wallet, { balance: Number(wallet.balance) + value });
+    await this.walletsRepository.save(wallet);
+
     this.cacheProvider.delete(`transactions:${wallet_id}`);
+    this.cacheProvider.delete(`wallets:${user_id}`);
 
     return transaction;
   }

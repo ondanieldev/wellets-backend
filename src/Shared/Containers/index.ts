@@ -1,4 +1,5 @@
 // Modules containers
+import 'Modules/Conversions/Containers';
 import 'Modules/Currencies/Containers';
 import 'Modules/Users/Containers';
 import 'Modules/Transactions/Containers';
