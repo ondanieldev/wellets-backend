@@ -105,6 +105,17 @@
 - [x] the user must be authenticated;
 - [x] only the owner can delete their wallet;
 
+## Show total balance
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to view the sum of their balances based on a currency;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the base currency must be valid;
+
 # [ TRANSACTIONS ]
 
 ## Add or remove money from wallet

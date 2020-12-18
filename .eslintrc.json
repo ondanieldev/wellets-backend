@@ -28,7 +28,10 @@
         "ts": "never"
       }
     ],
+    "no-await-in-loop": "off",
+    "no-continue": "off",
     "no-useless-constructor": "off",
+    "no-restricted-syntax": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": [
       "error",

@@ -3,10 +3,12 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import AuthController from 'Shared/Containers/AuthProvider/Controllers/AuthController';
 import WalletsController from '../Controllers/WalletsController';
+import WalletsTotalBalanceController from '../Controllers/WalletsTotalBalanceController';
 
 const walletsRoutes = Router();
 const authController = new AuthController();
 const walletsController = new WalletsController();
+const walletsTotalBalanceController = new WalletsTotalBalanceController();
 
 walletsRoutes.use(authController.on);
 walletsRoutes.post(
@@ -25,10 +27,19 @@ walletsRoutes.delete(
   '/:wallet_id',
   celebrate({
     [Segments.PARAMS]: {
-      wallet_id: Joi.string().required(),
+      wallet_id: Joi.string().uuid().required(),
     },
   }),
   walletsController.delete,
+);
+walletsRoutes.get(
+  '/total-balance',
+  celebrate({
+    [Segments.QUERY]: {
+      base_currency_id: Joi.string().uuid().required(),
+    },
+  }),
+  walletsTotalBalanceController.show,
 );
 
 export default walletsRoutes;
