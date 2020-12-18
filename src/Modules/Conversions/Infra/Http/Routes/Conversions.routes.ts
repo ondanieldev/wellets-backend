@@ -21,5 +21,14 @@ conversionsRoutes.post(
   }),
   conversionsController.create,
 );
+conversionsRoutes.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      wallet_id: Joi.string().uuid().required(),
+    },
+  }),
+  conversionsController.index,
+);
 
 export default conversionsRoutes;

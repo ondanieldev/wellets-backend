@@ -34,6 +34,21 @@ class ConversionsRepository implements IConversionsRepository {
 
     return conversion;
   }
+
+  public async findByWalletId(wallet_id: string): Promise<Conversion[]> {
+    const conversions = await this.ormRepository.find({
+      where: [
+        {
+          from_wallet_id: wallet_id,
+        },
+        {
+          to_wallet_id: wallet_id,
+        },
+      ],
+    });
+
+    return conversions;
+  }
 }
 
 export default ConversionsRepository;
