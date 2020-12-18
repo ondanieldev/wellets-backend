@@ -118,7 +118,7 @@
 - [x] the user must be authenticated;
 - [x] the wallet must exist;
 - [x] the user must be the owner of the wallet;
-- [ ] the wallet balance must be updated;
+- [x] the wallet balance must be updated;
 
 ## Index wallet transactions
 
