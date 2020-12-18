@@ -293,6 +293,20 @@
           "timezone": "UTC"
       }
   },
+  "BTC": {
+      "name": "Bitcoin",
+      "code": "BTC",
+      "symbol": "BTC",
+      "format": "BTC 1,0.0",
+      "exchange_rate": 1,
+      "active": 0,
+      "created_at": "2019-07-26 22:57:39",
+      "updated_at": {
+          "date": "2019-11-15 00:00:00.000000",
+          "timezone_type": 3,
+          "timezone": "UTC"
+      }
+  },
   "BTN": {
       "name": "Bhutan, Ngultrum",
       "code": "BTN",
