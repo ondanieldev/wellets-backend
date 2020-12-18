@@ -15,8 +15,8 @@ conversionsRoutes.post(
     [Segments.BODY]: {
       from_wallet_id: Joi.string().uuid().required(),
       to_wallet_id: Joi.string().uuid().required(),
-      percentual_rate: Joi.number().positive(),
-      static_rate: Joi.number().positive(),
+      percentual_rate: Joi.number().min(0),
+      static_rate: Joi.number().min(0),
     },
   }),
   conversionsController.create,

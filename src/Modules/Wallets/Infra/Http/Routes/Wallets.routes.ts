@@ -15,7 +15,7 @@ walletsRoutes.post(
     [Segments.BODY]: {
       alias: Joi.string().required(),
       currency_id: Joi.string().uuid().required(),
-      balance: Joi.number().positive(),
+      balance: Joi.number().min(0),
     },
   }),
   walletsController.create,
