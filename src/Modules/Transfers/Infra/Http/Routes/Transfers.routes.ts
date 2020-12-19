@@ -2,14 +2,14 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 
 import AuthController from 'Shared/Containers/AuthProvider/Controllers/AuthController';
-import ConversionsController from '../Controllers/ConversionsController';
+import TransfersController from '../Controllers/TransfersController';
 
-const conversionsRoutes = Router();
+const transfersRoutes = Router();
 const authController = new AuthController();
-const conversionsController = new ConversionsController();
+const transfersController = new TransfersController();
 
-conversionsRoutes.use(authController.on);
-conversionsRoutes.post(
+transfersRoutes.use(authController.on);
+transfersRoutes.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -17,18 +17,19 @@ conversionsRoutes.post(
       to_wallet_id: Joi.string().uuid().required(),
       percentual_rate: Joi.number().min(0),
       static_rate: Joi.number().min(0),
+      value: Joi.number().positive().required(),
     },
   }),
-  conversionsController.create,
+  transfersController.create,
 );
-conversionsRoutes.get(
+transfersRoutes.get(
   '/',
   celebrate({
     [Segments.QUERY]: {
       wallet_id: Joi.string().uuid().required(),
     },
   }),
-  conversionsController.index,
+  transfersController.index,
 );
 
-export default conversionsRoutes;
+export default transfersRoutes;

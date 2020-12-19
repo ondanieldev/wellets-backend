@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('conversions')
-class Conversion {
+@Entity('transfers')
+class Transfer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,6 +19,9 @@ class Conversion {
 
   @Column('uuid')
   to_wallet_id: string;
+
+  @Column({ type: 'decimal' })
+  value: number;
 
   @Column({ type: 'decimal', default: 0 })
   static_rate: number;
@@ -32,13 +35,13 @@ class Conversion {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Wallet, wallet => wallet.from_conversions)
+  @ManyToOne(() => Wallet, wallet => wallet.from_transfers)
   @JoinColumn({ name: 'from_wallet_id' })
   from_wallet: Wallet;
 
-  @ManyToOne(() => Wallet, wallet => wallet.to_conversions)
+  @ManyToOne(() => Wallet, wallet => wallet.to_transfers)
   @JoinColumn({ name: 'to_wallet_id' })
   to_wallet: Wallet;
 }
 
-export default Conversion;
+export default Transfer;

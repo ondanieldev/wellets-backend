@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
-import CreateConversionService from '../../../Services/CreateConversionService';
-import IndexWalletConversionsService from '../../../Services/IndexWalletConversionsService';
+import CreateTransferService from '../../../Services/CreateTransferService';
+import IndexWalletTransfersService from '../../../Services/IndexWalletTransfersService';
 
-class ConversionsController {
+class TransfersController {
   public async create(
     request: Request,
     response: Response,
@@ -15,18 +15,20 @@ class ConversionsController {
       percentual_rate,
       static_rate,
       to_wallet_id,
+      value,
     } = request.body;
 
     const { user } = request;
 
-    const createConversion = container.resolve(CreateConversionService);
+    const createTransfer = container.resolve(CreateTransferService);
 
-    const conversion = await createConversion.execute({
+    const conversion = await createTransfer.execute({
       user_id: user.id,
       from_wallet_id,
       percentual_rate,
       static_rate,
       to_wallet_id,
+      value,
     });
 
     return response.status(201).json(conversion);
@@ -41,17 +43,15 @@ class ConversionsController {
 
     const { user } = request;
 
-    const indexWalletConversions = container.resolve(
-      IndexWalletConversionsService,
-    );
+    const indexWalletTransfers = container.resolve(IndexWalletTransfersService);
 
-    const conversion = await indexWalletConversions.execute({
+    const transfers = await indexWalletTransfers.execute({
       user_id: user.id,
       wallet_id: wallet_id.toString(),
     });
 
-    return response.status(201).json(conversion);
+    return response.status(201).json(transfers);
   }
 }
 
-export default ConversionsController;
+export default TransfersController;

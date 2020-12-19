@@ -3,8 +3,8 @@ import { inject, injectable } from 'tsyringe';
 import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
 import AppError from 'Shared/Errors/AppError';
 import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
-import Conversion from '../Infra/TypeORM/Entities/Conversion';
-import IConversionsRepository from '../Repositories/IConversionsRepository';
+import Transfer from '../Infra/TypeORM/Entities/Transfer';
+import ITransfersRepository from '../Repositories/ITransfersRepository';
 
 interface IRequest {
   user_id: string;
@@ -12,10 +12,10 @@ interface IRequest {
 }
 
 @injectable()
-class IndexWalletConversionsService {
+class IndexWalletTransfersService {
   constructor(
-    @inject('ConversionsRepository')
-    private conversionsRepository: IConversionsRepository,
+    @inject('TransfersRepository')
+    private transfersRepository: ITransfersRepository,
 
     @inject('WalletsRepository')
     private walletsRepository: IWalletsRepository,
@@ -24,10 +24,7 @@ class IndexWalletConversionsService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute({
-    user_id,
-    wallet_id,
-  }: IRequest): Promise<Conversion[]> {
+  public async execute({ user_id, wallet_id }: IRequest): Promise<Transfer[]> {
     const wallet = await this.walletsRepository.findById(wallet_id);
 
     if (!wallet) {
@@ -38,18 +35,18 @@ class IndexWalletConversionsService {
       throw new AppError('You are not the owner of this wallet!', 403);
     }
 
-    let conversions = await this.cacheProvider.find<Conversion[]>(
-      `conversions:${wallet_id}`,
+    let transfers = await this.cacheProvider.find<Transfer[]>(
+      `transfers:${wallet_id}`,
     );
 
-    if (!conversions) {
-      conversions = await this.conversionsRepository.findByWalletId(wallet_id);
+    if (!transfers) {
+      transfers = await this.transfersRepository.findByWalletId(wallet_id);
 
-      this.cacheProvider.save(`conversions:${wallet_id}`, conversions);
+      this.cacheProvider.save(`transfers:${wallet_id}`, transfers);
     }
 
-    return conversions;
+    return transfers;
   }
 }
 
-export default IndexWalletConversionsService;
+export default IndexWalletTransfersService;

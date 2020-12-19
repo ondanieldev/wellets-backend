@@ -5,12 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateTableConversions1608248747030
+export default class CreateTableTransfers1608248747030
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'conversions',
+        name: 'transfers',
         columns: [
           {
             name: 'id',
@@ -26,6 +26,10 @@ export default class CreateTableConversions1608248747030
           {
             name: 'to_wallet_id',
             type: 'uuid',
+          },
+          {
+            name: 'value',
+            type: 'decimal',
           },
           {
             name: 'static_rate',
@@ -52,7 +56,7 @@ export default class CreateTableConversions1608248747030
     );
 
     await queryRunner.createForeignKey(
-      'conversions',
+      'transfers',
       new TableForeignKey({
         name: 'from_wallet_id',
         columnNames: ['from_wallet_id'],
@@ -64,7 +68,7 @@ export default class CreateTableConversions1608248747030
     );
 
     await queryRunner.createForeignKey(
-      'conversions',
+      'transfers',
       new TableForeignKey({
         name: 'to_wallet_id',
         columnNames: ['to_wallet_id'],
@@ -77,8 +81,8 @@ export default class CreateTableConversions1608248747030
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('conversions', 'to_wallet_id');
-    await queryRunner.dropForeignKey('conversions', 'from_wallet_id');
-    await queryRunner.dropTable('conversions');
+    await queryRunner.dropForeignKey('transfers', 'to_wallet_id');
+    await queryRunner.dropForeignKey('transfers', 'from_wallet_id');
+    await queryRunner.dropTable('transfers');
   }
 }

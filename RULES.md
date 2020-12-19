@@ -147,27 +147,32 @@
 - [x] the wallet must exist;
 - [x] the user must be the owner of the wallet;
 
-# [ CONVERSIONS ]
+# [ TRANSFERS ]
 
-## Create conversion between two wallets
+## Create transfer between two wallets
 
 **FUNCTIONAL REQUIREMENTS**
 
-- [x] the user must be able to set up a conversion between two of their wallets;
+- [x] the user must be able to create a transfer between two of their wallets;
+
+**NON-FUNCTIONAL REQUIREMENTS**
+
+- [x] a transaction must be created for both wallets;
 
 **BUSINESS RULES**
 
 - [x] the user must be authenticated;
 - [x] the wallets must exist;
 - [x] the user must be the owner of the both wallets;
-- [x] rates must be positive values;
-- [x] it is not possible to create another conversion between the same wallets with the same positions;
+- [x] the value must be less than or equal to the source wallet balance;
+- [x] the value must be converted before inserting on the target wallet;
+- [x] the balance of both wallets must be updated;
 
-## Index wallet conversions
+## Index wallet transfers
 
 **FUNCTIONAL REQUIREMENTS**
 
-- [x] the user must be able to list all conversions that involves their wallet;
+- [x] the user must be able to list all transfers that involves their wallet;
 
 **NON-FUNCTIONAL REQUIREMENTS**
 

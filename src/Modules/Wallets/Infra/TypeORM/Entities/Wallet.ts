@@ -12,7 +12,7 @@ import {
 import User from 'Modules/Users/Infra/TypeORM/Entities/User';
 import Currency from 'Modules/Currencies/Infra/TypeORM/Entities/Currency';
 import Transaction from 'Modules/Transactions/Infra/TypeORM/Entities/Transaction';
-import Conversion from 'Modules/Conversions/Infra/TypeORM/Entities/Conversion';
+import Transfer from 'Modules/Transfers/Infra/TypeORM/Entities/Transfer';
 
 @Entity('wallets')
 class Wallet {
@@ -48,11 +48,11 @@ class Wallet {
   @OneToMany(() => Transaction, transaction => transaction.wallet)
   transactions: Transaction[];
 
-  @OneToMany(() => Conversion, conversion => conversion.from_wallet)
-  from_conversions: Conversion[];
+  @OneToMany(() => Transfer, transfer => transfer.from_wallet)
+  from_transfers: Transfer[];
 
-  @OneToMany(() => Conversion, conversion => conversion.to_wallet)
-  to_conversions: Conversion[];
+  @OneToMany(() => Transfer, transfer => transfer.to_wallet)
+  to_transfers: Transfer[];
 }
 
 export default Wallet;
