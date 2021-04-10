@@ -691,6 +691,14 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
+cors@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+  dependencies:
+    object-assign "^4"
+    vary "^1"
+
 create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
@@ -1829,6 +1837,11 @@ mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+module-alias@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/module-alias/-/module-alias-2.2.2.tgz#151cdcecc24e25739ff0aa6e51e1c5716974c0e0"
+  integrity sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -1876,6 +1889,11 @@ node-cron@^2.0.3:
     opencollective-postinstall "^2.0.0"
     tz-offset "0.0.1"
 
+node-fetch@^2.2.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.5.0.tgz#e66db1838b200c1dfc233225d12cb36520e234a8"
@@ -1891,7 +1909,7 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
-object-assign@^4.0.1:
+object-assign@^4, object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -2425,6 +2443,11 @@ safe-buffer@^5.0.1, safe-buffer@~5.2.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
+sandwich-stream@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/sandwich-stream/-/sandwich-stream-2.0.2.tgz#6d1feb6cf7e9fe9fadb41513459a72c2e84000fa"
+  integrity sha512-jLYV0DORrzY3xaz/S9ydJL6Iz7essZeAfnAavsJ+zsJGZ1MOnsS52yRjU3uF3pJa/lla7+wisp//fxOwOH8SKQ==
+
 sax@>=0.6.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -2701,6 +2724,23 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+telegraf@^3.38.0:
+  version "3.38.0"
+  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.38.0.tgz#745b447547a8e6cdb626055e4d616058aaae0759"
+  integrity sha512-va4VlrKWp64JrowFoZX/NPzzA6q38kvaIukVXOWFO1V+jR1G8+hCfgJy4TX8Z3rwLJzwaBEet1QhikHDRZWl3A==
+  dependencies:
+    debug "^4.0.1"
+    minimist "^1.2.0"
+    module-alias "^2.2.2"
+    node-fetch "^2.2.0"
+    sandwich-stream "^2.0.1"
+    telegram-typings "^3.6.0"
+
+telegram-typings@^3.6.0:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/telegram-typings/-/telegram-typings-3.6.1.tgz#1288d547f8694b61f1c01c2993e295f3114d9e25"
+  integrity sha512-njVv1EAhIZnmQVLocZEADYUyqA1WIXuVcDYlsp+mXua/XB0pxx+PKtMSPeZ/EE4wPWTw9h/hA9ASTT6yQelkiw==
+
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -2897,7 +2937,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vary@~1.1.2:
+vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
