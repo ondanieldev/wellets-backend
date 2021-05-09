@@ -3,12 +3,12 @@ import { injectable, inject } from 'tsyringe';
 import AppError from 'Shared/Errors/AppError';
 import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
 import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
-import Transaction from '../Infra/TypeORM/Entities/Transaction';
+import IPaginatedTransactionsDTO from 'Modules/Transactions/DTOs/IPaginatedTransactionsDTO';
 import ITransactionsRepository from '../Repositories/ITransactionsRepository';
+import IFindByWalletIdDTO from '../DTOs/IFindByWalletIdDTO';
 
-interface IRequest {
+interface IRequest extends IFindByWalletIdDTO {
   user_id: string;
-  wallet_id: string;
 }
 
 @injectable()
@@ -27,7 +27,8 @@ class IndexTransactionsService {
   public async execute({
     user_id,
     wallet_id,
-  }: IRequest): Promise<Transaction[]> {
+    ...rest
+  }: IRequest): Promise<IPaginatedTransactionsDTO> {
     const wallet = await this.walletsRepository.findById(wallet_id);
 
     if (!wallet) {
@@ -38,16 +39,19 @@ class IndexTransactionsService {
       throw new AppError('You are not the owner of this wallet!', 403);
     }
 
-    let transactions = await this.cacheProvider.find<Transaction[]>(
-      `transactions:${wallet_id}`,
+    const cacheKey = `transactions:${wallet_id}:${JSON.stringify(rest)}`;
+
+    let transactions = await this.cacheProvider.find<IPaginatedTransactionsDTO>(
+      cacheKey,
     );
 
     if (!transactions) {
-      transactions = await this.transactionsRepository.findByWalletId(
+      transactions = await this.transactionsRepository.findByWalletId({
         wallet_id,
-      );
+        ...rest,
+      });
 
-      this.cacheProvider.save(`transactions:${wallet_id}`, transactions);
+      this.cacheProvider.save(cacheKey, transactions);
     }
 
     return transactions;

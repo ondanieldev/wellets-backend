@@ -167,6 +167,7 @@
 - [x] the value must be less than or equal to the source wallet balance;
 - [x] the value must be converted before inserting on the target wallet;
 - [x] the balance of both wallets must be updated;
+- [x] the wallets must be differents;
 
 ## Index wallet transfers
 

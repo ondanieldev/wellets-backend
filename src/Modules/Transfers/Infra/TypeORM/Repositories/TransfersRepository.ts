@@ -3,6 +3,8 @@ import { EntityRepository, getRepository, Repository } from 'typeorm';
 import ICreateTransferDTO from 'Modules/Transfers/DTOs/ICreateTransferDTO';
 import ITransfersRepository from 'Modules/Transfers/Repositories/ITransfersRepository';
 import IFindByWalletsIdDTO from 'Modules/Transfers/DTOs/IFindByWalletsIdDTO';
+import IFindByWalletIdDTO from 'Modules/Transfers/DTOs/IFindByWalletIdDTO';
+import IPaginatedTransfersDTO from 'Modules/Transfers/DTOs/IPaginatedTransfersDTO';
 import Transfer from '../Entities/Transfer';
 
 @EntityRepository(Transfer)
@@ -35,8 +37,11 @@ class TransfersRepository implements ITransfersRepository {
     return transfer;
   }
 
-  public async findByWalletId(wallet_id: string): Promise<Transfer[]> {
-    const transfers = await this.ormRepository.find({
+  public async findByWalletId(
+    { wallet_id, limit, page }: IFindByWalletIdDTO,
+    complete?: boolean,
+  ): Promise<IPaginatedTransfersDTO> {
+    const result = await this.ormRepository.findAndCount({
       where: [
         {
           from_wallet_id: wallet_id,
@@ -45,9 +50,18 @@ class TransfersRepository implements ITransfersRepository {
           to_wallet_id: wallet_id,
         },
       ],
+      take: limit,
+      skip: (page - 1) * limit,
+      relations: complete ? ['from_wallet', 'to_wallet', 'to_wallet.user'] : [],
+      order: {
+        created_at: 'DESC',
+      },
     });
 
-    return transfers;
+    return {
+      transfers: result[0],
+      total: result[1],
+    };
   }
 }
 
