@@ -15,11 +15,7 @@ class RedisCacheProvider implements ICacheProvider {
     });
   }
 
-  public async save<T>(
-    key: string,
-    value: T,
-    expires = 10 * 60,
-  ): Promise<void> {
+  public async save<T>(key: string, value: T, expires = 2 * 60): Promise<void> {
     await this.redisClient.set(key, JSON.stringify(value), 'ex', expires);
   }
 
@@ -35,6 +31,18 @@ class RedisCacheProvider implements ICacheProvider {
 
   public async delete(key: string): Promise<void> {
     await this.redisClient.del(key);
+  }
+
+  public async deleteByPrefix(prefix: string): Promise<void> {
+    const keys = await this.redisClient.keys(`${prefix}:*`);
+
+    const pipeline = this.redisClient.pipeline();
+
+    keys.forEach(key => {
+      pipeline.del(key);
+    });
+
+    await pipeline.exec();
   }
 }
 

@@ -33,10 +33,15 @@ class WalletsController {
     _: NextFunction,
   ): Promise<Response> {
     const { id } = request.user;
+    const { limit, page } = request.query;
 
     const indexUserWallets = container.resolve(IndexUserWalletsService);
 
-    const wallets = await indexUserWallets.execute(id);
+    const wallets = await indexUserWallets.execute({
+      limit: Number(limit),
+      page: Number(page),
+      user_id: id,
+    });
 
     return response.json(wallets);
   }

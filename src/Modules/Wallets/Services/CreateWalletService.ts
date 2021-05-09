@@ -48,7 +48,7 @@ class CreateWalletService {
       balance,
     });
 
-    this.cacheProvider.delete(`wallets:${user_id}`);
+    this.cacheProvider.deleteByPrefix(`wallets:${user_id}`);
 
     return wallet;
   }
