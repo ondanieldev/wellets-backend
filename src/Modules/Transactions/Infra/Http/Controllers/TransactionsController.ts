@@ -31,13 +31,15 @@ class TransactionsController {
     _: NextFunction,
   ): Promise<Response> {
     const { user } = request;
-    const { wallet_id } = request.query;
+    const { wallet_id, limit, page } = request.query;
 
     const indexTransactions = container.resolve(IndexTransactionsService);
 
     const transactions = await indexTransactions.execute({
       user_id: user.id,
       wallet_id: wallet_id.toString(),
+      limit: Number(limit),
+      page: Number(page),
     });
 
     return response.status(200).json(transactions);
