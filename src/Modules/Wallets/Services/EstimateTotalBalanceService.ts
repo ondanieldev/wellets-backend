@@ -29,7 +29,9 @@ class EstimateTotalBalanceService {
     user_id,
     base_currency_id,
   }: IRequest): Promise<IResponse> {
-    const wallets = await this.walletsRepository.findByUserId(user_id);
+    const { wallets } = await this.walletsRepository.findByUserId({
+      user_id,
+    });
 
     const baseCurrency = await this.currenciesRepository.findById(
       base_currency_id,

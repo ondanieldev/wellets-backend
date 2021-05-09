@@ -32,7 +32,7 @@ class DeleteWalletsService {
 
     await this.walletsRepository.delete(wallet_id);
 
-    this.cacheProvider.delete(`wallets:${user_id}`);
+    this.cacheProvider.deleteByPrefix(`wallets:${user_id}`);
   }
 }
 

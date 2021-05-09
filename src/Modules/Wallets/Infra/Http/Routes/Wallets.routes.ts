@@ -22,7 +22,16 @@ walletsRoutes.post(
   }),
   walletsController.create,
 );
-walletsRoutes.get('/', walletsController.index);
+walletsRoutes.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      limit: Joi.number().positive().max(25).required(),
+      page: Joi.number().positive().required(),
+    },
+  }),
+  walletsController.index,
+);
 walletsRoutes.delete(
   '/:wallet_id',
   celebrate({

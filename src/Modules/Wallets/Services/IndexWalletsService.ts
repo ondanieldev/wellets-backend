@@ -2,7 +2,8 @@ import { inject, injectable } from 'tsyringe';
 
 import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
 import IWalletsRepository from '../Repositories/IWalletsRepository';
-import Wallet from '../Infra/TypeORM/Entities/Wallet';
+import IFindResponseDTO from '../DTOs/IFindResponseDTO';
+import IFindByUserIdDTO from '../DTOs/IFindByUserIdDTO';
 
 @injectable()
 class IndexWalletsService {
@@ -14,16 +15,24 @@ class IndexWalletsService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute(user_id: string): Promise<Wallet[]> {
-    let wallets = await this.cacheProvider.find<Wallet[]>(`wallets:${user_id}`);
+  public async execute({
+    user_id,
+    ...rest
+  }: IFindByUserIdDTO): Promise<IFindResponseDTO> {
+    const cacheKey = `wallets:${user_id}:${JSON.stringify(rest)}`;
 
-    if (!wallets) {
-      wallets = await this.walletsRepository.findByUserId(user_id);
+    let data = await this.cacheProvider.find<IFindResponseDTO>(cacheKey);
 
-      this.cacheProvider.save<Wallet[]>(`wallets:${user_id}`, wallets);
+    if (!data) {
+      data = await this.walletsRepository.findByUserId({
+        user_id,
+        ...rest,
+      });
+
+      this.cacheProvider.save<IFindResponseDTO>(cacheKey, data);
     }
 
-    return wallets;
+    return data;
   }
 }
 

@@ -1,8 +1,10 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 
+import IFindByUserIdDTO from 'Modules/Wallets/DTOs/IFindByUserIdDTO';
+import ICreateWalletDTO from 'Modules/Wallets/DTOs/ICreateWalletDTO';
+import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
+import IFindResponseDTO from 'Modules/Wallets/DTOs/IFindResponseDTO';
 import Wallet from '../Entities/Wallet';
-import ICreateWalletDTO from '../../../DTOs/ICreateWalletDTO';
-import IWalletsRepository from '../../../Repositories/IWalletsRepository';
 
 @EntityRepository(Wallet)
 class WalletsRepository implements IWalletsRepository {
@@ -34,14 +36,23 @@ class WalletsRepository implements IWalletsRepository {
     return wallet;
   }
 
-  public async findByUserId(user_id: string): Promise<Wallet[]> {
-    const wallets = await this.ormRepository.find({
+  public async findByUserId({
+    limit,
+    page,
+    user_id,
+  }: IFindByUserIdDTO): Promise<IFindResponseDTO> {
+    const [wallets, total] = await this.ormRepository.findAndCount({
       where: {
         user_id,
       },
+      take: limit,
+      skip: (page - 1) * limit,
     });
 
-    return wallets;
+    return {
+      wallets,
+      total,
+    };
   }
 
   public async findById(id: string): Promise<Wallet> {
