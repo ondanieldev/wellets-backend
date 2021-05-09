@@ -52,7 +52,14 @@ class TransfersRepository implements ITransfersRepository {
       ],
       take: limit,
       skip: (page - 1) * limit,
-      relations: complete ? ['from_wallet', 'to_wallet', 'to_wallet.user'] : [],
+      relations: complete
+        ? [
+            'from_wallet',
+            'to_wallet',
+            'from_wallet.currency',
+            'to_wallet.currency',
+          ]
+        : [],
       order: {
         created_at: 'DESC',
       },

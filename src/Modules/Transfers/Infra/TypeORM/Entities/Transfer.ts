@@ -30,6 +30,9 @@ class Transfer {
   @Column({ type: 'decimal', default: 0 })
   percentual_rate: number;
 
+  @Column({ type: 'decimal' })
+  filled: number;
+
   @CreateDateColumn()
   created_at: Date;
 

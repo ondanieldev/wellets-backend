@@ -42,6 +42,10 @@ export default class CreateTableTransfers1608248747030
             default: 0,
           },
           {
+            name: 'filled',
+            type: 'decimal',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

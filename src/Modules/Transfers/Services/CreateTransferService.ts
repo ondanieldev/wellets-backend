@@ -9,7 +9,7 @@ import Transfer from '../Infra/TypeORM/Entities/Transfer';
 import ICreateTransferDTO from '../DTOs/ICreateTransferDTO';
 import ITransfersRepository from '../Repositories/ITransfersRepository';
 
-interface IRequest extends ICreateTransferDTO {
+interface IRequest extends Omit<ICreateTransferDTO, 'filled'> {
   user_id: string;
 }
 
@@ -67,33 +67,25 @@ class CreateTransferService {
       throw new AppError('You does not have balance enough!', 400);
     }
 
-    // Convert currencies
-    let convertedValue = value - static_rate - percentual_rate * value;
-
-    if (fromWallet.currency_id !== toWallet.currency_id) {
-      const fromCurrency = await this.currenciesRepository.findById(
-        fromWallet.currency_id,
-      );
-      const toCurrency = await this.currenciesRepository.findById(
-        toWallet.currency_id,
-      );
-
-      if (!fromCurrency || !toCurrency) {
-        throw new AppError(
-          'Sorry, one of your wallets are using an invalid currency!',
-          404,
-        );
-      }
-
-      const fromRate = Number(fromCurrency.dollar_rate);
-      const toRate = Number(toCurrency.dollar_rate);
-      const fromBalance = Number(fromWallet.balance);
-
-      convertedValue = (toRate * fromBalance) / fromRate;
-    }
-
     // Calculate liquid value
-    const liquidValue = convertedValue - static_rate - percentual_rate * value;
+    const liquidValue = value - static_rate - (percentual_rate / 100) * value;
+
+    // Convert liquid value
+    const fromCurrency = await this.currenciesRepository.findById(
+      fromWallet.currency_id,
+    );
+    const toCurrency = await this.currenciesRepository.findById(
+      toWallet.currency_id,
+    );
+    if (!fromCurrency || !toCurrency) {
+      throw new AppError(
+        'Sorry, one of your wallets are using an invalid currency!',
+        404,
+      );
+    }
+    const fromRate = Number(fromCurrency.dollar_rate);
+    const toRate = Number(toCurrency.dollar_rate);
+    const filled = (toRate * liquidValue) / fromRate;
 
     // Do transfer
     const transfer = await this.transfersRepository.create({
@@ -102,6 +94,7 @@ class CreateTransferService {
       value,
       percentual_rate,
       static_rate,
+      filled,
     });
 
     // Do transactions
@@ -112,13 +105,13 @@ class CreateTransferService {
     });
     await this.transactionsRepository.create({
       description: `Received from ${fromWallet.alias}`,
-      value: liquidValue,
+      value: filled,
       wallet_id: toWallet.id,
     });
 
     // Update balances
     fromWallet.balance = Number(fromWallet.balance) - value;
-    toWallet.balance = Number(toWallet.balance) + liquidValue;
+    toWallet.balance = Number(toWallet.balance) + filled;
 
     await this.walletsRepository.save(fromWallet);
     await this.walletsRepository.save(toWallet);
