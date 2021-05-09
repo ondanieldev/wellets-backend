@@ -39,7 +39,7 @@ class TransfersController {
     response: Response,
     _: NextFunction,
   ): Promise<Response> {
-    const { wallet_id } = request.query;
+    const { wallet_id, limit, page } = request.query;
 
     const { user } = request;
 
@@ -48,6 +48,8 @@ class TransfersController {
     const transfers = await indexWalletTransfers.execute({
       user_id: user.id,
       wallet_id: wallet_id.toString(),
+      limit: Number(limit),
+      page: Number(page),
     });
 
     return response.status(201).json(transfers);

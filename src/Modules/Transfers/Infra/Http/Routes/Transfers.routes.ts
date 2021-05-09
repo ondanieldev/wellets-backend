@@ -27,6 +27,8 @@ transfersRoutes.get(
   celebrate({
     [Segments.QUERY]: {
       wallet_id: Joi.string().uuid().required(),
+      limit: Joi.number().positive().max(25).required(),
+      page: Joi.number().positive().required(),
     },
   }),
   transfersController.index,

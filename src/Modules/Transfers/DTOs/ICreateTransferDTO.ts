@@ -1,4 +1,4 @@
-interface ICreateConversionDTO {
+interface ICreateTransferDTO {
   from_wallet_id: string;
   to_wallet_id: string;
   value: number;
@@ -6,4 +6,4 @@ interface ICreateConversionDTO {
   percentual_rate?: number;
 }
 
-export default ICreateConversionDTO;
+export default ICreateTransferDTO;

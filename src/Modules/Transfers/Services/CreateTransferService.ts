@@ -40,6 +40,12 @@ class CreateTransferService {
     static_rate,
     user_id,
   }: IRequest): Promise<Transfer> {
+    if (from_wallet_id === to_wallet_id) {
+      throw new AppError(
+        'It is not possible to transfer money using one wallet!',
+      );
+    }
+
     // Get wallets
     const fromWallet = await this.walletsRepository.findById(from_wallet_id);
     const toWallet = await this.walletsRepository.findById(to_wallet_id);
@@ -118,8 +124,8 @@ class CreateTransferService {
     await this.walletsRepository.save(toWallet);
 
     // Invalidate cache
-    this.cacheProvider.delete(`transfers:${from_wallet_id}`);
-    this.cacheProvider.delete(`transfers:${to_wallet_id}`);
+    this.cacheProvider.deleteByPrefix(`transfers:${from_wallet_id}`);
+    this.cacheProvider.deleteByPrefix(`transfers:${to_wallet_id}`);
 
     return transfer;
   }

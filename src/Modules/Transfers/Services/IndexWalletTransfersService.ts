@@ -3,12 +3,12 @@ import { inject, injectable } from 'tsyringe';
 import IWalletsRepository from 'Modules/Wallets/Repositories/IWalletsRepository';
 import AppError from 'Shared/Errors/AppError';
 import ICacheProvider from 'Shared/Containers/CacheProvider/Models/ICacheProvider';
-import Transfer from '../Infra/TypeORM/Entities/Transfer';
 import ITransfersRepository from '../Repositories/ITransfersRepository';
+import IFindByWalletIdDTO from '../DTOs/IFindByWalletIdDTO';
+import IPaginatedTransfersDTO from '../DTOs/IPaginatedTransfersDTO';
 
-interface IRequest {
+interface IRequest extends IFindByWalletIdDTO {
   user_id: string;
-  wallet_id: string;
 }
 
 @injectable()
@@ -24,7 +24,11 @@ class IndexWalletTransfersService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute({ user_id, wallet_id }: IRequest): Promise<Transfer[]> {
+  public async execute({
+    user_id,
+    wallet_id,
+    ...rest
+  }: IRequest): Promise<IPaginatedTransfersDTO> {
     const wallet = await this.walletsRepository.findById(wallet_id);
 
     if (!wallet) {
@@ -35,14 +39,22 @@ class IndexWalletTransfersService {
       throw new AppError('You are not the owner of this wallet!', 403);
     }
 
-    let transfers = await this.cacheProvider.find<Transfer[]>(
-      `transfers:${wallet_id}`,
+    const cacheKey = `transfers:${wallet_id}:${JSON.stringify(rest)}`;
+
+    let transfers = await this.cacheProvider.find<IPaginatedTransfersDTO>(
+      cacheKey,
     );
 
     if (!transfers) {
-      transfers = await this.transfersRepository.findByWalletId(wallet_id);
+      transfers = await this.transfersRepository.findByWalletId(
+        {
+          wallet_id,
+          ...rest,
+        },
+        true,
+      );
 
-      this.cacheProvider.save(`transfers:${wallet_id}`, transfers);
+      this.cacheProvider.save(cacheKey, transfers);
     }
 
     return transfers;

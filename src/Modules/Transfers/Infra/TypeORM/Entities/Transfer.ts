@@ -1,4 +1,3 @@
-import Wallet from 'Modules/Wallets/Infra/TypeORM/Entities/Wallet';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import Wallet from 'Modules/Wallets/Infra/TypeORM/Entities/Wallet';
 
 @Entity('transfers')
 class Transfer {
