@@ -55,11 +55,12 @@ class WalletsRepository implements IWalletsRepository {
     };
   }
 
-  public async findById(id: string): Promise<Wallet> {
+  public async findById(id: string, complete?: boolean): Promise<Wallet> {
     const wallet = await this.ormRepository.findOne({
       where: {
         id,
       },
+      relations: complete ? ['currency'] : [],
     });
 
     return wallet;

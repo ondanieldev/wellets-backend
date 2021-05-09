@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
+import ShowWalletService from 'Modules/Wallets/Services/ShowWalletService';
 import CreateWalletService from '../../../Services/CreateWalletService';
 import IndexUserWalletsService from '../../../Services/IndexWalletsService';
 import DeleteWalletService from '../../../Services/DeleteWalletService';
@@ -63,6 +64,24 @@ class WalletsController {
     });
 
     return response.status(204).json(wallets);
+  }
+
+  public async show(
+    request: Request,
+    response: Response,
+    _: NextFunction,
+  ): Promise<Response> {
+    const { id } = request.user;
+    const { wallet_id } = request.params;
+
+    const showWallet = container.resolve(ShowWalletService);
+
+    const wallets = await showWallet.execute({
+      user_id: id,
+      wallet_id,
+    });
+
+    return response.json(wallets);
   }
 }
 

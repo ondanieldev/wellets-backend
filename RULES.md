@@ -105,6 +105,18 @@
 - [x] the user must be authenticated;
 - [x] only the owner can delete their wallet;
 
+## Show wallet
+
+**FUNCTIONAL REQUIREMENTS**
+
+- [x] the user must be able to view their wallet;
+
+**BUSINESS RULES**
+
+- [x] the user must be authenticated;
+- [x] the wallet must exist;
+- [x] the user must be the owner of the wallet;
+
 ## Show total balance
 
 **FUNCTIONAL REQUIREMENTS**
