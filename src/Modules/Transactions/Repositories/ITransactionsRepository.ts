@@ -5,7 +5,10 @@ import IFindByWalletIdDTO from '../DTOs/IFindByWalletIdDTO';
 
 interface ITransactionsRepository {
   create(data: ICreateTransactionDTO): Promise<Transaction>;
-  findByWalletId(data: IFindByWalletIdDTO): Promise<IPaginatedTransactionsDTO>;
+  findByWalletId(
+    data: IFindByWalletIdDTO,
+    complete?: boolean,
+  ): Promise<IPaginatedTransactionsDTO>;
 }
 
 export default ITransactionsRepository;
