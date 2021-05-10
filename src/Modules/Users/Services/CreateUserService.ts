@@ -22,7 +22,7 @@ class CreateUserService {
     const userExists = await this.usersRepository.findByEmail(parsedEmail);
 
     if (userExists) {
-      throw new AppError('This email is already in use!');
+      throw new AppError('This email is already in use!', 401);
     }
 
     const hashedPassword = await this.hashProvider.encrypt(password);

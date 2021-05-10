@@ -57,7 +57,7 @@ class EstimateTotalBalanceService {
 
       if (!walletCurrency) {
         throw new AppError(
-          'Sorry, the currency attached to your wallet was not found! Please, try again later.',
+          'Sorry, the currency attached to your wallet was not found!',
           404,
         );
       }

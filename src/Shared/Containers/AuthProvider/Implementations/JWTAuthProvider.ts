@@ -28,7 +28,7 @@ class JWTAuthProvider implements IAuthProvider {
 
       return payload as ITokenPayload;
     } catch {
-      throw new AppError('Invalid JWT token!');
+      throw new AppError('Invalid JWT token!', 401);
     }
   }
 }

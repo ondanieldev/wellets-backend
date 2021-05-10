@@ -26,7 +26,7 @@ class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(parsedEmail);
 
     if (!user) {
-      throw new AppError('Invalid email and password combination!');
+      throw new AppError('Invalid email and password combination!', 401);
     }
 
     const passwordMatch = await this.hashProvider.compare(
@@ -35,7 +35,7 @@ class AuthenticateUserService {
     );
 
     if (!passwordMatch) {
-      throw new AppError('Invalid email and password combination!');
+      throw new AppError('Invalid email and password combination!', 401);
     }
 
     const token = await this.authProvider.generateToken(user);

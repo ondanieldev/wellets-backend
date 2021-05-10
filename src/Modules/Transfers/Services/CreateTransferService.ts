@@ -52,7 +52,7 @@ class CreateTransferService {
 
     if (!fromWallet || !toWallet) {
       throw new AppError(
-        'Some wallets involved on transfer does not exist!',
+        'Some wallets involved on transfer do not exist!',
         404,
       );
     }
@@ -64,7 +64,7 @@ class CreateTransferService {
 
     // Check balance
     if (value > fromWallet.balance) {
-      throw new AppError('You does not have balance enough!', 400);
+      throw new AppError('You does not have balance enough!');
     }
 
     // Calculate liquid value
@@ -79,7 +79,7 @@ class CreateTransferService {
     );
     if (!fromCurrency || !toCurrency) {
       throw new AppError(
-        'Sorry, one of your wallets are using an invalid currency!',
+        'Sorry, one of your wallets are using an currency that does not exist!',
         404,
       );
     }

@@ -38,7 +38,7 @@ class CreateWalletService {
     const currency = await this.currenciesRepository.findById(currency_id);
 
     if (!currency) {
-      throw new AppError('The wallet must have a valid currency!');
+      throw new AppError('The wallet must has a valid currency!', 404);
     }
 
     const wallet = await this.walletsRepository.create({
