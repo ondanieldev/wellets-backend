@@ -22,11 +22,10 @@ class TransactionsRepository implements ITransactionsRepository {
     return transaction;
   }
 
-  public async findByWalletId({
-    wallet_id,
-    limit,
-    page,
-  }: IFindByWalletIdDTO): Promise<IPaginatedTransactionsDTO> {
+  public async findByWalletId(
+    { wallet_id, limit, page }: IFindByWalletIdDTO,
+    complete?: boolean,
+  ): Promise<IPaginatedTransactionsDTO> {
     const result = await this.ormRepository.findAndCount({
       where: {
         wallet_id,
@@ -36,6 +35,7 @@ class TransactionsRepository implements ITransactionsRepository {
       order: {
         created_at: 'DESC',
       },
+      relations: complete ? ['wallet', 'wallet.currency'] : [],
     });
 
     return {

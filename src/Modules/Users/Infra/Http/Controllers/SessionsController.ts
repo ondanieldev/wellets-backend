@@ -36,6 +36,14 @@ class SessionsController {
 
     return response.status(204).json();
   }
+
+  public async show(
+    request: Request,
+    response: Response,
+    _: NextFunction,
+  ): Promise<Response> {
+    return response.status(204).json();
+  }
 }
 
 export default SessionsController;

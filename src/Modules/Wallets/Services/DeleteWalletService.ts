@@ -23,11 +23,11 @@ class DeleteWalletsService {
     const wallet = await this.walletsRepository.findById(wallet_id);
 
     if (!wallet) {
-      throw new AppError('This wallet does not exist!');
+      throw new AppError('This wallet does not exist!', 404);
     }
 
     if (wallet.user_id !== user_id) {
-      throw new AppError('You are not the owner of this wallet!');
+      throw new AppError('You are not the owner of this wallet!', 403);
     }
 
     await this.walletsRepository.delete(wallet_id);

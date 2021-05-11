@@ -24,5 +24,6 @@ usersRoutes.post(
 // Private routes
 usersRoutes.use(authController.on);
 usersRoutes.delete('/', sessionsController.delete);
+usersRoutes.get('/', sessionsController.show);
 
 export default usersRoutes;

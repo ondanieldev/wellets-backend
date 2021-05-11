@@ -46,10 +46,13 @@ class IndexTransactionsService {
     );
 
     if (!transactions) {
-      transactions = await this.transactionsRepository.findByWalletId({
-        wallet_id,
-        ...rest,
-      });
+      transactions = await this.transactionsRepository.findByWalletId(
+        {
+          wallet_id,
+          ...rest,
+        },
+        true,
+      );
 
       this.cacheProvider.save(cacheKey, transactions);
     }

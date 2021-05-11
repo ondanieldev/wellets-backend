@@ -1,6 +1,7 @@
 interface ICacheConfig {
   driver: 'redis';
   redis: {
+    host: string;
     port: number;
     password: string;
   };
@@ -9,6 +10,7 @@ interface ICacheConfig {
 export default {
   driver: process.env.CACHE_DRIVER,
   redis: {
+    host: process.env.CACHE_REDIS_HOST,
     port: Number(process.env.CACHE_REDIS_PORT),
     password: process.env.CACHE_REDIS_PASSWORD,
   },
