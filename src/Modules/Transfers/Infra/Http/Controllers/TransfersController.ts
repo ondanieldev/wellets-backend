@@ -12,8 +12,8 @@ class TransfersController {
   ): Promise<Response> {
     const {
       from_wallet_id,
-      percentual_rate,
-      static_rate,
+      percentual_fee,
+      static_fee,
       to_wallet_id,
       value,
     } = request.body;
@@ -25,8 +25,8 @@ class TransfersController {
     const conversion = await createTransfer.execute({
       user_id: user.id,
       from_wallet_id,
-      percentual_rate,
-      static_rate,
+      percentual_fee,
+      static_fee,
       to_wallet_id,
       value,
     });

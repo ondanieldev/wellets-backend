@@ -36,8 +36,8 @@ class CreateTransferService {
     from_wallet_id,
     to_wallet_id,
     value,
-    percentual_rate,
-    static_rate,
+    percentual_fee,
+    static_fee,
     user_id,
   }: IRequest): Promise<Transfer> {
     if (from_wallet_id === to_wallet_id) {
@@ -68,7 +68,9 @@ class CreateTransferService {
     }
 
     // Calculate liquid value
-    const liquidValue = value - static_rate - (percentual_rate / 100) * value;
+    const staticFee = static_fee || 0;
+    const percentualFee = percentual_fee || 0;
+    const liquidValue = value - staticFee - (percentualFee / 100) * value;
 
     // Convert liquid value
     const fromCurrency = await this.currenciesRepository.findById(
@@ -92,8 +94,8 @@ class CreateTransferService {
       from_wallet_id,
       to_wallet_id,
       value,
-      percentual_rate,
-      static_rate,
+      percentual_fee,
+      static_fee,
       filled,
     });
 

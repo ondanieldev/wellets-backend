@@ -20,7 +20,7 @@ class RateLimiter {
 
       const rateLimiterRedis = new RateLimiterRedis({
         storeClient: redisClient,
-        points: 5,
+        points: 15,
         duration: 1,
         keyPrefix: 'rlflx',
       });
