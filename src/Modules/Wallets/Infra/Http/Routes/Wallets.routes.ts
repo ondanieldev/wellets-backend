@@ -42,15 +42,6 @@ walletsRoutes.delete(
   walletsController.delete,
 );
 walletsRoutes.get(
-  '/:wallet_id',
-  celebrate({
-    [Segments.PARAMS]: {
-      wallet_id: Joi.string().uuid().required(),
-    },
-  }),
-  walletsController.show,
-);
-walletsRoutes.get(
   '/total-balance',
   celebrate({
     [Segments.QUERY]: {
@@ -58,6 +49,15 @@ walletsRoutes.get(
     },
   }),
   walletsTotalBalanceController.show,
+);
+walletsRoutes.get(
+  '/:wallet_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      wallet_id: Joi.string().uuid().required(),
+    },
+  }),
+  walletsController.show,
 );
 
 export default walletsRoutes;
