@@ -68,7 +68,9 @@ class CreateTransferService {
     }
 
     // Calculate liquid value
-    const liquidValue = value - static_rate - (percentual_rate / 100) * value;
+    const staticRate = static_rate || 0;
+    const percentualRate = percentual_rate || 0;
+    const liquidValue = value - staticRate - (percentualRate / 100) * value;
 
     // Convert liquid value
     const fromCurrency = await this.currenciesRepository.findById(
