@@ -32,12 +32,12 @@ export default class CreateTableTransfers1608248747030
             type: 'decimal',
           },
           {
-            name: 'static_rate',
+            name: 'static_fee',
             type: 'decimal',
             default: 0,
           },
           {
-            name: 'percentual_rate',
+            name: 'percentual_fee',
             type: 'decimal',
             default: 0,
           },

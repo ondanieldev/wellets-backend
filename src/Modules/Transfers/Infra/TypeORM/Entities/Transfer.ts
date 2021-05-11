@@ -25,10 +25,10 @@ class Transfer {
   value: number;
 
   @Column({ type: 'decimal', default: 0 })
-  static_rate: number;
+  static_fee: number;
 
   @Column({ type: 'decimal', default: 0 })
-  percentual_rate: number;
+  percentual_fee: number;
 
   @Column({ type: 'decimal' })
   filled: number;
