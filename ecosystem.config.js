@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'WELLETS API',
+      name: 'WELLETS',
       script: './dist/Shared/Infra/Http/index.js',
       exec_mode: 'fork',
       instances: 1,
