@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore node_modules ./src/Shared/Infra/Http/index.ts",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "create-migration": "yarn typeorm migration:create -n",
     "run-migrations": "yarn typeorm migration:run",
@@ -33,7 +34,15 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/plugin-proposal-decorators": "^7.13.15",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-typescript": "^7.13.0",
     "axios": "^0.21.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "bcryptjs": "^2.4.3",
     "celebrate": "^13.0.4",
     "class-transformer": "^0.3.1",
