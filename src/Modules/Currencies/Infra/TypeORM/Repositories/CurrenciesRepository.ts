@@ -1,9 +1,8 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
+import { EntityRepository, Repository, getRepository, IsNull } from 'typeorm';
 
 import Currency from '../Entities/Currency';
 import ICreateCurrencyDTO from '../../../DTOs/ICreateCurrencyDTO';
 import ICurrenciesRepository from '../../../Repositories/ICurrenciesRepository';
-import currenciesRoutes from '../../Http/Routes/Currencies.routes';
 
 @EntityRepository(Currency)
 class CurrenciesRepository implements ICurrenciesRepository {
@@ -21,14 +20,15 @@ class CurrenciesRepository implements ICurrenciesRepository {
     return currency;
   }
 
-  public async findByAcronym(acronym: string): Promise<Currency | undefined> {
-    const currency = await this.ormRepository.findOne({
+  public async findByAcronymAndNoUser(
+    acronym: string,
+  ): Promise<Currency | undefined> {
+    return this.ormRepository.findOne({
       where: {
         acronym,
+        user_id: IsNull(),
       },
     });
-
-    return currency;
   }
 
   public async save(currency: Currency): Promise<Currency> {
@@ -38,19 +38,31 @@ class CurrenciesRepository implements ICurrenciesRepository {
   }
 
   public async findById(id: string): Promise<Currency | undefined> {
-    const currency = await this.ormRepository.findOne({
+    return this.ormRepository.findOne({
       where: {
         id,
       },
     });
-
-    return currency;
   }
 
-  public async find(): Promise<Currency[]> {
-    const currencies = await this.ormRepository.find();
+  public async find(user_id?: string): Promise<Currency[]> {
+    return this.ormRepository.find({
+      where: user_id
+        ? [{ user_id }, { user_id: IsNull() }]
+        : { user_id: IsNull() },
+    });
+  }
 
-    return currencies;
+  public async findByAcronymAndUser(
+    acronym: string,
+    user_id: string,
+  ): Promise<Currency | undefined> {
+    return this.ormRepository.findOne({
+      where: {
+        acronym,
+        user_id,
+      },
+    });
   }
 }
 

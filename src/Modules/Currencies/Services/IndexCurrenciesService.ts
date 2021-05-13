@@ -9,10 +9,8 @@ class IndexCurrenciesService {
     private currenciesRepository: ICurrenciesRepository,
   ) {}
 
-  public async execute(): Promise<Currency[]> {
-    const currencies = this.currenciesRepository.find();
-
-    return currencies;
+  public async execute(user_id?: string): Promise<Currency[]> {
+    return this.currenciesRepository.find(user_id);
   }
 }
 

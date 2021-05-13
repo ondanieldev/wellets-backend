@@ -18,7 +18,9 @@ class UpdateCurrenciesService {
     const latestCurrenciesRates = await this.ratesProvider.getLatestRates();
 
     Object.entries(latestCurrenciesRates).forEach(async ([acronym, rate]) => {
-      const currency = await this.currenciesRepository.findByAcronym(acronym);
+      const currency = await this.currenciesRepository.findByAcronymAndNoUser(
+        acronym,
+      );
 
       if (currency) {
         currency.dollar_rate = rate;

@@ -42,7 +42,7 @@ class TransactionsController {
       page: Number(page),
     });
 
-    return response.status(200).json(transactions);
+    return response.json(transactions);
   }
 }
 
