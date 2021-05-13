@@ -23,5 +23,20 @@ currenciesRoutes.post(
   }),
   currenciesController.create,
 );
+currenciesRoutes.put(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      acronym: Joi.string().max(4).required(),
+      alias: Joi.string().required(),
+      dollar_rate: Joi.number().required(),
+      format: Joi.string().required(),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  currenciesController.update,
+);
 
 export default currenciesRoutes;

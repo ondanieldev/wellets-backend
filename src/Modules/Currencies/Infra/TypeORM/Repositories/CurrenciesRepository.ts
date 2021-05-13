@@ -20,17 +20,6 @@ class CurrenciesRepository implements ICurrenciesRepository {
     return currency;
   }
 
-  public async findByAcronymAndNoUser(
-    acronym: string,
-  ): Promise<Currency | undefined> {
-    return this.ormRepository.findOne({
-      where: {
-        acronym,
-        user_id: IsNull(),
-      },
-    });
-  }
-
   public async save(currency: Currency): Promise<Currency> {
     await this.ormRepository.save(currency);
 
@@ -53,15 +42,26 @@ class CurrenciesRepository implements ICurrenciesRepository {
     });
   }
 
-  public async findByAcronymAndUser(
+  public async findByAcronym(
     acronym: string,
-    user_id: string,
+    user_id?: string,
   ): Promise<Currency | undefined> {
     return this.ormRepository.findOne({
-      where: {
-        acronym,
-        user_id,
-      },
+      where: user_id
+        ? [
+            {
+              acronym,
+              user_id,
+            },
+            {
+              acronym,
+              user_id: IsNull(),
+            },
+          ]
+        : {
+            acronym,
+            user_id: IsNull(),
+          },
     });
   }
 }

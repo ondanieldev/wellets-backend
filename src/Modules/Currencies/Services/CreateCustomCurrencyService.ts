@@ -6,6 +6,10 @@ import Currency from '../Infra/TypeORM/Entities/Currency';
 
 import ICurrenciesRepository from '../Repositories/ICurrenciesRepository';
 
+interface IRequest extends ICreateCurrencyDTO {
+  user_id: string;
+}
+
 @injectable()
 class CreateCustomCurrencyService {
   constructor(
@@ -13,16 +17,14 @@ class CreateCustomCurrencyService {
     private currenciesRepository: ICurrenciesRepository,
   ) {}
 
-  public async execute(data: ICreateCurrencyDTO): Promise<Currency> {
-    const exists = await this.currenciesRepository.findByAcronymAndUser(
+  public async execute(data: IRequest): Promise<Currency> {
+    const exists = await this.currenciesRepository.findByAcronym(
       data.acronym,
       data.user_id,
     );
 
     if (exists) {
-      throw new AppError(
-        'You have already created a currency with this acronym!',
-      );
+      throw new AppError('This acronym is already in use!');
     }
 
     return this.currenciesRepository.create(data);

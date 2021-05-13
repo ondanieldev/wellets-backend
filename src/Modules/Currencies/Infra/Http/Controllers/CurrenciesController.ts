@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import CreateCustomCurrencyService from 'Modules/Currencies/Services/CreateCustomCurrencyService';
 import { container } from 'tsyringe';
 
-import IndexCurrenciesService from '../../../Services/IndexCurrenciesService';
+import IndexCurrenciesService from 'Modules/Currencies/Services/IndexCurrenciesService';
+import CreateCustomCurrencyService from 'Modules/Currencies/Services/CreateCustomCurrencyService';
+import UpdateCustomCurrencyService from 'Modules/Currencies/Services/UpdateCustomCurrencyService';
 
 class CurrenciesController {
   public async index(
@@ -36,6 +37,29 @@ class CurrenciesController {
       alias,
       dollar_rate,
       format,
+    });
+
+    return response.json(currency);
+  }
+
+  public async update(
+    request: Request,
+    response: Response,
+    _: NextFunction,
+  ): Promise<Response> {
+    const { user } = request;
+    const { id } = request.params;
+    const { acronym, alias, dollar_rate, format } = request.body;
+
+    const updateCustomCurrency = container.resolve(UpdateCustomCurrencyService);
+
+    const currency = await updateCustomCurrency.execute({
+      user_id: user.id,
+      acronym,
+      alias,
+      dollar_rate,
+      format,
+      id,
     });
 
     return response.json(currency);
