@@ -3,6 +3,7 @@ interface ICreateCurrencyDTO {
   alias: string;
   format: string;
   dollar_rate: number;
+  user_id?: string;
 }
 
 export default ICreateCurrencyDTO;

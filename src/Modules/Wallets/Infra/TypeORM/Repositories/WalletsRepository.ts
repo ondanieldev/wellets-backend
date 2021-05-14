@@ -47,6 +47,9 @@ class WalletsRepository implements IWalletsRepository {
       },
       take: limit,
       skip: (page - 1) * limit,
+      order: {
+        balance: 'DESC',
+      },
     });
 
     return {

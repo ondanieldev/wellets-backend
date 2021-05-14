@@ -20,7 +20,7 @@ class WalletsTotalBalanceController {
       base_currency_id: base_currency_id.toString(),
     });
 
-    return response.status(200).json(result);
+    return response.json(result);
   }
 }
 

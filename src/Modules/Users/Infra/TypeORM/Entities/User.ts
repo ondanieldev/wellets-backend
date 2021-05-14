@@ -9,6 +9,7 @@ import {
 import { Exclude } from 'class-transformer';
 
 import Wallet from 'Modules/Wallets/Infra/TypeORM/Entities/Wallet';
+import Currency from 'Modules/Currencies/Infra/TypeORM/Entities/Currency';
 
 @Entity('users')
 class User {
@@ -33,6 +34,9 @@ class User {
 
   @OneToMany(() => Wallet, wallet => wallet.user)
   wallets: Wallet[];
+
+  @OneToMany(() => Currency, currency => currency.user)
+  custom_currencies: Currency[];
 }
 
 export default User;

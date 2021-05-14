@@ -5,16 +5,19 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import Wallet from 'Modules/Wallets/Infra/TypeORM/Entities/Wallet';
+import User from 'Modules/Users/Infra/TypeORM/Entities/User';
 
 @Entity('currencies')
 class Currency {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ length: 3, unique: true })
+  @Column({ length: 4 })
   acronym: string;
 
   @Column()
@@ -31,6 +34,13 @@ class Currency {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column('uuid')
+  user_id?: string;
+
+  @ManyToOne(() => User, user => user.custom_currencies)
+  @JoinColumn({ name: 'user_id' })
+  user?: User;
 
   @OneToMany(() => Wallet, wallet => wallet.currency)
   wallets: Wallet[];

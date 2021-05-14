@@ -1,10 +1,16 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
+import {
+  EntityRepository,
+  Repository,
+  getRepository,
+  IsNull,
+  FindConditions,
+} from 'typeorm';
 
 import Currency from '../Entities/Currency';
 import ICreateCurrencyDTO from '../../../DTOs/ICreateCurrencyDTO';
 import ICurrenciesRepository from '../../../Repositories/ICurrenciesRepository';
-import currenciesRoutes from '../../Http/Routes/Currencies.routes';
 
+type Where = FindConditions<Currency>[] | FindConditions<Currency>;
 @EntityRepository(Currency)
 class CurrenciesRepository implements ICurrenciesRepository {
   private ormRepository: Repository<Currency>;
@@ -21,16 +27,6 @@ class CurrenciesRepository implements ICurrenciesRepository {
     return currency;
   }
 
-  public async findByAcronym(acronym: string): Promise<Currency | undefined> {
-    const currency = await this.ormRepository.findOne({
-      where: {
-        acronym,
-      },
-    });
-
-    return currency;
-  }
-
   public async save(currency: Currency): Promise<Currency> {
     await this.ormRepository.save(currency);
 
@@ -38,19 +34,56 @@ class CurrenciesRepository implements ICurrenciesRepository {
   }
 
   public async findById(id: string): Promise<Currency | undefined> {
-    const currency = await this.ormRepository.findOne({
+    return this.ormRepository.findOne({
       where: {
         id,
       },
     });
-
-    return currency;
   }
 
-  public async find(): Promise<Currency[]> {
-    const currencies = await this.ormRepository.find();
+  public async find(
+    user_id?: string,
+    get_natives?: boolean,
+  ): Promise<Currency[]> {
+    let where = { user_id: IsNull() } as Where;
 
-    return currencies;
+    if (user_id) {
+      where = get_natives ? [{ user_id }, { user_id: IsNull() }] : { user_id };
+    }
+
+    return this.ormRepository.find({
+      where,
+      order: {
+        acronym: 'DESC',
+      },
+    });
+  }
+
+  public async findByAcronym(
+    acronym: string,
+    user_id?: string,
+  ): Promise<Currency | undefined> {
+    return this.ormRepository.findOne({
+      where: user_id
+        ? [
+            {
+              acronym,
+              user_id,
+            },
+            {
+              acronym,
+              user_id: IsNull(),
+            },
+          ]
+        : {
+            acronym,
+            user_id: IsNull(),
+          },
+    });
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 }
 
