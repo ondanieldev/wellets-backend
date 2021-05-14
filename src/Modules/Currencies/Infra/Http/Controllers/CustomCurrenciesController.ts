@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import IndexCustomCurrenciesService from 'Modules/Currencies/Services/IndexCustomCurrenciesService';
 import CreateCustomCurrencyService from 'Modules/Currencies/Services/CreateCustomCurrencyService';
 import UpdateCustomCurrencyService from 'Modules/Currencies/Services/UpdateCustomCurrencyService';
+import DeleteCustomCurrencyService from 'Modules/Currencies/Services/DeleteCustomCurrencyService';
 
 class CustomCurrenciesController {
   public async index(
@@ -62,6 +63,24 @@ class CustomCurrenciesController {
       dollar_rate,
       format,
       id,
+    });
+
+    return response.json(currency);
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    _: NextFunction,
+  ): Promise<Response> {
+    const { user } = request;
+    const { id } = request.params;
+
+    const deleteCustomCurrency = container.resolve(DeleteCustomCurrencyService);
+
+    const currency = await deleteCustomCurrency.execute({
+      id,
+      user_id: user.id,
     });
 
     return response.json(currency);

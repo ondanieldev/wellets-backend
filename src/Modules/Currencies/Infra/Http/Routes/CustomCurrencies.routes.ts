@@ -38,5 +38,14 @@ customCurrenciesRoutes.put(
   }),
   customCurrenciesController.update,
 );
+customCurrenciesRoutes.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  customCurrenciesController.delete,
+);
 
 export default customCurrenciesRoutes;

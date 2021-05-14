@@ -78,6 +78,10 @@ class CurrenciesRepository implements ICurrenciesRepository {
           },
     });
   }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
 
 export default CurrenciesRepository;
