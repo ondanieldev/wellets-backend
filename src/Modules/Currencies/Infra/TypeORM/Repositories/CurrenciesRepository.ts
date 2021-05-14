@@ -53,6 +53,9 @@ class CurrenciesRepository implements ICurrenciesRepository {
 
     return this.ormRepository.find({
       where,
+      order: {
+        acronym: 'DESC',
+      },
     });
   }
 

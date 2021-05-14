@@ -17,7 +17,7 @@ customCurrenciesRoutes.post(
     [Segments.BODY]: {
       acronym: Joi.string().max(4).required(),
       alias: Joi.string().required(),
-      dollar_rate: Joi.number().required(),
+      dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
     },
   }),
@@ -29,7 +29,7 @@ customCurrenciesRoutes.put(
     [Segments.BODY]: {
       acronym: Joi.string().max(4).required(),
       alias: Joi.string().required(),
-      dollar_rate: Joi.number().required(),
+      dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
     },
     [Segments.PARAMS]: {
