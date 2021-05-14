@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://wellets.ondaniel.com.br/">
+  <a href="https://wellets-api.ondaniel.com.br/">
     <div>
       <h1 style="color: #68d391">Wellets</h1>
     </div>
