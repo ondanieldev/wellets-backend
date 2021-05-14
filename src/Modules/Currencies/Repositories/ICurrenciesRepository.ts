@@ -9,7 +9,7 @@ interface ICurrenciesRepository {
   ): Promise<Currency | undefined>;
   save(currency: Currency): Promise<Currency>;
   findById(id: string): Promise<Currency | undefined>;
-  find(user_id?: string): Promise<Currency[]>;
+  find(user_id?: string, get_natives?: boolean): Promise<Currency[]>;
 }
 
 export default ICurrenciesRepository;

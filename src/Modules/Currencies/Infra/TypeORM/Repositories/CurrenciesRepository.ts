@@ -1,9 +1,16 @@
-import { EntityRepository, Repository, getRepository, IsNull } from 'typeorm';
+import {
+  EntityRepository,
+  Repository,
+  getRepository,
+  IsNull,
+  FindConditions,
+} from 'typeorm';
 
 import Currency from '../Entities/Currency';
 import ICreateCurrencyDTO from '../../../DTOs/ICreateCurrencyDTO';
 import ICurrenciesRepository from '../../../Repositories/ICurrenciesRepository';
 
+type Where = FindConditions<Currency>[] | FindConditions<Currency>;
 @EntityRepository(Currency)
 class CurrenciesRepository implements ICurrenciesRepository {
   private ormRepository: Repository<Currency>;
@@ -34,11 +41,18 @@ class CurrenciesRepository implements ICurrenciesRepository {
     });
   }
 
-  public async find(user_id?: string): Promise<Currency[]> {
+  public async find(
+    user_id?: string,
+    get_natives?: boolean,
+  ): Promise<Currency[]> {
+    let where = { user_id: IsNull() } as Where;
+
+    if (user_id) {
+      where = get_natives ? [{ user_id }, { user_id: IsNull() }] : { user_id };
+    }
+
     return this.ormRepository.find({
-      where: user_id
-        ? [{ user_id }, { user_id: IsNull() }]
-        : { user_id: IsNull() },
+      where,
     });
   }
 
