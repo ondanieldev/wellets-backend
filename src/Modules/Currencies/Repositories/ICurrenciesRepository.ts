@@ -3,10 +3,14 @@ import ICreateCurrencyDTO from '../DTOs/ICreateCurrencyDTO';
 
 interface ICurrenciesRepository {
   create(data: ICreateCurrencyDTO): Promise<Currency>;
-  findByAcronym(acronym: string): Promise<Currency | undefined>;
+  findByAcronym(
+    acronym: string,
+    user_id?: string,
+  ): Promise<Currency | undefined>;
   save(currency: Currency): Promise<Currency>;
   findById(id: string): Promise<Currency | undefined>;
-  find(): Promise<Currency[]>;
+  find(user_id?: string, get_natives?: boolean): Promise<Currency[]>;
+  delete(id: string): Promise<void>;
 }
 
 export default ICurrenciesRepository;

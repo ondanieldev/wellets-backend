@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import currenciesRoutes from 'Modules/Currencies/Infra/Http/Routes/Currencies.routes';
+import currenciesRoutes from 'Modules/Currencies/Infra/Http/Routes/index.routes';
 import transactionsRoutes from 'Modules/Transactions/Infra/Http/Routes/Transactions.routes';
 import transfersRoutes from 'Modules/Transfers/Infra/Http/Routes/Transfers.routes';
 import usersRoutes from 'Modules/Users/Infra/Http/Routes/index.routes';
