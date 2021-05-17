@@ -119,6 +119,8 @@ class CreateTransferService {
     await this.walletsRepository.save(toWallet);
 
     // Invalidate cache
+    this.cacheProvider.deleteByPrefix(`wallets:${fromWallet.user_id}`);
+    this.cacheProvider.deleteByPrefix(`wallets:${toWallet.user_id}`);
     this.cacheProvider.deleteByPrefix(`transfers:${from_wallet_id}`);
     this.cacheProvider.deleteByPrefix(`transfers:${to_wallet_id}`);
 

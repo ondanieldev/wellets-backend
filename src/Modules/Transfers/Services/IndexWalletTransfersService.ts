@@ -40,7 +40,6 @@ class IndexWalletTransfersService {
     }
 
     const cacheKey = `transfers:${wallet_id}:${JSON.stringify(rest)}`;
-    this.cacheProvider.deleteByPrefix(cacheKey);
 
     let transfers = await this.cacheProvider.find<IPaginatedTransfersDTO>(
       cacheKey,
