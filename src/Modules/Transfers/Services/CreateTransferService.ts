@@ -123,6 +123,8 @@ class CreateTransferService {
     this.cacheProvider.deleteByPrefix(`wallets:${toWallet.user_id}`);
     this.cacheProvider.deleteByPrefix(`transfers:${from_wallet_id}`);
     this.cacheProvider.deleteByPrefix(`transfers:${to_wallet_id}`);
+    this.cacheProvider.deleteByPrefix(`transactions:${from_wallet_id}`);
+    this.cacheProvider.deleteByPrefix(`transactions:${to_wallet_id}`);
 
     return transfer;
   }
