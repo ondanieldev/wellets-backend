@@ -35,34 +35,37 @@ This repository contains the code related to [Wellets Back-end](https://github.c
 - Sign up
 - Sign in
 - Sign out
-- Wallet CRUD
+- Wallets CRUD
 - View sum of balances of all wallets on a specific currency
 - Create transactions and transfers
 - View transaction and transfer history
 - Custom currencies CRUD
+- And more!
 
 If [Wellets](https://wellets.ondaniel.com.br/) currently does not have a certain feature you think it is awesome, be sure to check out the [roadmap](https://www.notion.so/Wellets-public-roadmap-d5e4445d9cc0441694c246904979e5bb) to see if this is already planned for the future. Otherwise, you can contact me by any contact method listed in my [Github Profile](https://github.com/stemDaniel) to send your ideas.
 
 ## Endpoints
 
-| METHOD | PATH                   | SHORT DESCRIPTION                       |
-| ------ | ---------------------- | --------------------------------------- |
-| GET    | /currencies            | Index native and user custom currencies |
-| GET    | /currencies/custom     | Index user custom currencies            |
-| POST   | /currencies/custom     | Create a custom currency                |
-| PUT    | /currencies/custom/:id | Update a custom currency                |
-| DELETE | /currencies/custom/:id | Delete a custom currency                |
-| GET    | /transactions          | Index wallet transactions               |
-| POST   | /transactions          | Create a wallet transaction             |
-| GET    | /transfers             | Index wallet transfers                  |
-| POST   | /transfers             | Create a transfer between two wallets   |
-| POST   | /users                 | User sign up                            |
-| POST   | /users/sessions        | User sign in                            |
-| DELETE | /users/sessions        | User sign out                           |
-| GET    | /wallets               | Index user wallets                      |
-| POST   | /wallets               | Create a wallet                         |
-| DELETE | /wallets               | Delete a wallet                         |
-| GET    | /wallets/total-balance | Show the sum of wallets balances        |
+| METHOD | PATH                   | SHORT DESCRIPTION                           |
+| ------ | ---------------------- | ------------------------------------------- |
+| GET    | /currencies            | Index native and user custom currencies     |
+| GET    | /currencies/rate       | Show currency rate based on other currency  |
+| GET    | /currencies/custom     | Index user custom currencies                |
+| POST   | /currencies/custom     | Create a custom currency                    |
+| PUT    | /currencies/custom/:id | Update a custom currency                    |
+| DELETE | /currencies/custom/:id | Delete a custom currency                    |
+| GET    | /transactions          | Index wallet transactions                   |
+| POST   | /transactions          | Create a wallet transaction                 |
+| GET    | /transfers             | Index wallet transfers                      |
+| POST   | /transfers             | Create a transfer between two wallets       |
+| POST   | /users                 | User sign up                                |
+| POST   | /users/sessions        | User sign in                                |
+| DELETE | /users/sessions        | User sign out                               |
+| GET    | /wallets               | Index user wallets                          |
+| POST   | /wallets               | Create a wallet                             |
+| DELETE | /wallets               | Delete a wallet                             |
+| GET    | /wallets/balance       | Show wallet balance based on other currency |
+| GET    | /wallets/total-balance | Show the sum of wallets balances            |
 
 ## How to run
 
