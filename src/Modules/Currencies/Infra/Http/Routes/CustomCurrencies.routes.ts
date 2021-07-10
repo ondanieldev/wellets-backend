@@ -15,7 +15,7 @@ customCurrenciesRoutes.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      acronym: Joi.string().max(4).required(),
+      acronym: Joi.string().max(4).uppercase().required(),
       alias: Joi.string().required(),
       dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
@@ -27,7 +27,7 @@ customCurrenciesRoutes.put(
   '/:id',
   celebrate({
     [Segments.BODY]: {
-      acronym: Joi.string().max(4).required(),
+      acronym: Joi.string().max(4).uppercase().required(),
       alias: Joi.string().required(),
       dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
