@@ -7,7 +7,7 @@ import currencyRatesRoutes from './CurrencyRates.routes';
 const routes = Router();
 
 routes.use('/custom', customCurrenciesRoutes);
-routes.use('/rates', currencyRatesRoutes);
+routes.use('/rate', currencyRatesRoutes);
 routes.use('/', currenciesRoutes);
 
 export default routes;
