@@ -35,10 +35,10 @@ class ShowCurrencyRate {
       user_id,
     );
     if (!baseCurrency || !targetCurrency) {
-      throw new AppError('Currencie not found', 404);
+      throw new AppError('Currency not found!', 404);
     }
 
-    const rate = baseCurrency.dollar_rate / targetCurrency.dollar_rate;
+    const rate = targetCurrency.dollar_rate / baseCurrency.dollar_rate;
     const description = `1 ${baseCurrency.acronym} = ${rate} ${targetCurrency.acronym}`;
 
     return {

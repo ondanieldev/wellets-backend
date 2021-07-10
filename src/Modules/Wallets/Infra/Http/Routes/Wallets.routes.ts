@@ -3,11 +3,13 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import AuthController from 'Shared/Containers/AuthProvider/Controllers/AuthController';
 import WalletsController from '../Controllers/WalletsController';
+import WalletBalancesController from '../Controllers/WalletBalancesController';
 import WalletsTotalBalanceController from '../Controllers/WalletsTotalBalanceController';
 
 const walletsRoutes = Router();
 const authController = new AuthController();
 const walletsController = new WalletsController();
+const walletBalancesController = new WalletBalancesController();
 const walletsTotalBalanceController = new WalletsTotalBalanceController();
 
 walletsRoutes.use(authController.on);
@@ -49,6 +51,16 @@ walletsRoutes.get(
     },
   }),
   walletsTotalBalanceController.show,
+);
+walletsRoutes.get(
+  '/balance',
+  celebrate({
+    [Segments.QUERY]: {
+      wallet_id: Joi.string().uuid().required(),
+      target_currency: Joi.string().required(),
+    },
+  }),
+  walletBalancesController.show,
 );
 walletsRoutes.get(
   '/:wallet_id',
