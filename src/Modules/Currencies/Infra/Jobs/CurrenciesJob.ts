@@ -13,6 +13,11 @@ class CurrenciesJob {
 
     updateJob.start();
   }
+
+  public once(): void {
+    const updateCurrencies = container.resolve(UpdateCurrenciesService);
+    updateCurrencies.execute();
+  }
 }
 
 export default CurrenciesJob;
