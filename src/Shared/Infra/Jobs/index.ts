@@ -1,10 +1,14 @@
 import CurrenciesJob from 'Modules/Currencies/Infra/Jobs/CurrenciesJob';
 
 class Jobs {
-  public run(): void {
-    const currenciesJob = new CurrenciesJob();
+  private currenciesJob = new CurrenciesJob();
 
-    currenciesJob.update();
+  public run(): void {
+    this.currenciesJob.update();
+  }
+
+  public once(): void {
+    this.currenciesJob.once();
   }
 }
 

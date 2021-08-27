@@ -23,6 +23,7 @@ const rateLimiter = new RateLimiter();
 
 typeORM.run().then(() => {
   jobs.run();
+  jobs.once();
 });
 
 app.use(cors());
