@@ -10,7 +10,7 @@ class IndexCustomCurrenciesService {
   ) {}
 
   public async execute(user_id?: string): Promise<Currency[]> {
-    return this.currenciesRepository.find(user_id);
+    return this.currenciesRepository.find(user_id, false, false);
   }
 }
 

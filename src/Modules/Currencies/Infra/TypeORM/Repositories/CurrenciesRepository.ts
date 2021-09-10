@@ -4,6 +4,7 @@ import {
   getRepository,
   IsNull,
   FindConditions,
+  OrderByCondition,
 } from 'typeorm';
 
 import Currency from '../Entities/Currency';
@@ -34,56 +35,67 @@ class CurrenciesRepository implements ICurrenciesRepository {
   }
 
   public async findById(id: string): Promise<Currency | undefined> {
-    return this.ormRepository.findOne({
-      where: {
-        id,
-      },
-    });
+    return this.selectQuery().where({ id }).getOne();
   }
 
   public async find(
     user_id?: string,
     get_natives?: boolean,
+    sort_by_favorite?: boolean,
   ): Promise<Currency[]> {
     let where = { user_id: IsNull() } as Where;
+
+    const orderBy: OrderByCondition = {
+      ...(sort_by_favorite ? { favorite: 'DESC' } : {}),
+      'currency.acronym': 'ASC',
+    };
 
     if (user_id) {
       where = get_natives ? [{ user_id }, { user_id: IsNull() }] : { user_id };
     }
 
-    return this.ormRepository.find({
-      where,
-      order: {
-        acronym: 'ASC',
-      },
-    });
+    return this.selectQuery().where(where).orderBy(orderBy).getMany();
   }
 
   public async findByAcronym(
     acronym: string,
     user_id?: string,
   ): Promise<Currency | undefined> {
-    return this.ormRepository.findOne({
-      where: user_id
-        ? [
-            {
-              acronym,
-              user_id,
-            },
-            {
-              acronym,
-              user_id: IsNull(),
-            },
-          ]
-        : {
+    const where = user_id
+      ? [
+          {
+            acronym,
+            user_id,
+          },
+          {
             acronym,
             user_id: IsNull(),
           },
-    });
+        ]
+      : {
+          acronym,
+          user_id: IsNull(),
+        };
+
+    return this.selectQuery().where(where).getOne();
   }
 
   public async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+  private selectQuery() {
+    return this.ormRepository
+      .createQueryBuilder('currency')
+      .addSelect(
+        'preference.favorite is not null and preference.favorite',
+        'favorite',
+      )
+      .leftJoin(
+        'currency.user_preferences',
+        'preference',
+        'currency.id = preference.currency_id AND preference.user_id = currency.user_id',
+      );
   }
 }
 
