@@ -54,7 +54,7 @@ class CurrenciesRepository implements ICurrenciesRepository {
       where = get_natives ? [{ user_id }, { user_id: IsNull() }] : { user_id };
     }
 
-    return this.selectQuery().where(where).orderBy(orderBy).getMany();
+    return this.selectQuery(user_id).where(where).orderBy(orderBy).getMany();
   }
 
   public async findByAcronym(
@@ -84,7 +84,7 @@ class CurrenciesRepository implements ICurrenciesRepository {
     await this.ormRepository.delete(id);
   }
 
-  private selectQuery() {
+  private selectQuery(user_id?: string) {
     return this.ormRepository
       .createQueryBuilder('currency')
       .addSelect(
@@ -94,7 +94,8 @@ class CurrenciesRepository implements ICurrenciesRepository {
       .leftJoin(
         'currency.user_preferences',
         'preference',
-        'currency.id = preference.currency_id AND preference.user_id = currency.user_id',
+        'currency.id = preference.currency_id AND preference.user_id = :user_id',
+        { user_id },
       );
   }
 }
