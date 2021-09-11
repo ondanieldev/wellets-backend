@@ -49,6 +49,7 @@ If [Wellets](https://wellets.ondaniel.com.br/) currently does not have a certain
 | METHOD | PATH                   | SHORT DESCRIPTION                           |
 | ------ | ---------------------- | ------------------------------------------- |
 | GET    | /currencies            | Index native and user custom currencies     |
+| PUT    | /currencies/:id        | Set preference for the currency             |
 | GET    | /currencies/rate       | Show currency rate based on other currency  |
 | GET    | /currencies/custom     | Index user custom currencies                |
 | POST   | /currencies/custom     | Create a custom currency                    |
