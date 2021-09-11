@@ -50,7 +50,7 @@ class CustomCurrenciesController {
     const currency_preference = await createCurrencyPreference.execute({
       user_id: id,
       currency_id: currency.id,
-      favorite,
+      favorite: !!favorite,
     });
 
     currency.favorite = currency_preference.favorite;
@@ -84,7 +84,7 @@ class CustomCurrenciesController {
     const currency_preference = await updateCurrencyPreference.execute({
       user_id: user.id,
       currency_id: currency.id,
-      favorite,
+      favorite: !!favorite,
     });
 
     currency.favorite = currency_preference.favorite;
