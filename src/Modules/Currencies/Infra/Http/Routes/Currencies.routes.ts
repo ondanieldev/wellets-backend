@@ -1,3 +1,4 @@
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 
 import AuthController from 'Shared/Containers/AuthProvider/Controllers/AuthController';
@@ -9,6 +10,26 @@ const currenciesController = new CurrenciesController();
 
 // Private routes
 currenciesRoutes.use(authController.on);
-currenciesRoutes.get('/', currenciesController.index);
+currenciesRoutes.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      sort_by: Joi.string(),
+    },
+  }),
+  currenciesController.index,
+);
+currenciesRoutes.put(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      favorite: Joi.boolean().required(),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  currenciesController.update,
+);
 
 export default currenciesRoutes;

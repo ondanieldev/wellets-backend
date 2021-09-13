@@ -1,5 +1,6 @@
 import { createConnection } from 'typeorm';
 
+import './polyfill';
 import log from '../../Helpers/log';
 
 class TypeORM {
