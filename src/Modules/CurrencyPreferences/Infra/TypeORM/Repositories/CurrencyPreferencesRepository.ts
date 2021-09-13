@@ -1,7 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 
 import CurrencyPreference from '../Entities/CurrencyPreference';
-import ICreateCurrencyPreferenceDTO from '../../../DTOs/ICreateCurrencyPreferenceDTO';
+import IUpsertCurrencyPreferenceDTO from '../../../DTOs/IUpsertCurrencyPreferenceDTO';
 import ICurrencyPreferencesRepository from '../../../Repositories/ICurrencyPreferencesRepository';
 
 class CurrencyPreferencesRepository implements ICurrencyPreferencesRepository {
@@ -12,7 +12,7 @@ class CurrencyPreferencesRepository implements ICurrencyPreferencesRepository {
   }
 
   public async create(
-    data: ICreateCurrencyPreferenceDTO,
+    data: IUpsertCurrencyPreferenceDTO,
   ): Promise<CurrencyPreference> {
     const currency = this.ormRepository.create(data);
 

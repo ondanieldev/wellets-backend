@@ -1,20 +1,20 @@
 import { inject, injectable, container } from 'tsyringe';
 
 import CurrencyPreference from '../Infra/TypeORM/Entities/CurrencyPreference';
-import ICreateOrUpdateCurrencyPreferenceDTO from '../DTOs/ICreateOrUpdateCurrencyPreferenceDTO';
 import UpdateCurrencyPreferenceService from './UpdateCurrencyPreferenceService';
 import CreateCurrencyPreferenceService from './CreateCurrencyPreferenceService';
 import ICurrencyPreferencesRepository from '../Repositories/ICurrencyPreferencesRepository';
+import IUpsertCurrencyPreferenceDTO from '../DTOs/IUpsertCurrencyPreferenceDTO';
 
 @injectable()
-class CreateOrUpdateCurrencyPreferenceService {
+class UpsertCurrencyPreferenceService {
   constructor(
     @inject('CurrencyPreferencesRepository')
     private currencyPreferencesRepository: ICurrencyPreferencesRepository,
   ) {}
 
   public async execute(
-    data: ICreateOrUpdateCurrencyPreferenceDTO,
+    data: IUpsertCurrencyPreferenceDTO,
   ): Promise<CurrencyPreference> {
     const createCurrencyPreference = container.resolve(
       CreateCurrencyPreferenceService,
@@ -44,4 +44,4 @@ class CreateOrUpdateCurrencyPreferenceService {
   }
 }
 
-export default CreateOrUpdateCurrencyPreferenceService;
+export default UpsertCurrencyPreferenceService;

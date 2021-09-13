@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from 'Shared/Errors/AppError';
-import ICreateCurrencyPreferenceDTO from '../DTOs/ICreateCurrencyPreferenceDTO';
+import IUpsertCurrencyPreferenceDTO from '../DTOs/IUpsertCurrencyPreferenceDTO';
 import CurrencyPreference from '../Infra/TypeORM/Entities/CurrencyPreference';
 import ICurrencyPreferencesRepository from '../Repositories/ICurrencyPreferencesRepository';
 
@@ -13,7 +13,7 @@ class CreateCurrencyPreferenceService {
   ) {}
 
   public async execute(
-    data: ICreateCurrencyPreferenceDTO,
+    data: IUpsertCurrencyPreferenceDTO,
   ): Promise<CurrencyPreference> {
     const exists = await this.currencyPreferencesRepository.find(
       data.user_id,

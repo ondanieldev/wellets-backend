@@ -1,8 +1,8 @@
 import CurrencyPreference from '../Infra/TypeORM/Entities/CurrencyPreference';
-import ICreateCurrencyPreferenceDTO from '../DTOs/ICreateCurrencyPreferenceDTO';
+import IUpsertCurrencyPreferenceDTO from '../DTOs/IUpsertCurrencyPreferenceDTO';
 
 interface ICurrencyPreferencesRepository {
-  create(data: ICreateCurrencyPreferenceDTO): Promise<CurrencyPreference>;
+  create(data: IUpsertCurrencyPreferenceDTO): Promise<CurrencyPreference>;
   save(currency: CurrencyPreference): Promise<CurrencyPreference>;
   findById(id: string): Promise<CurrencyPreference | undefined>;
   find(

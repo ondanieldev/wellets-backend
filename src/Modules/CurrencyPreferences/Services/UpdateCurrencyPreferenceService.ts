@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import AppError from 'Shared/Errors/AppError';
 import CurrencyPreference from '../Infra/TypeORM/Entities/CurrencyPreference';
 import ICurrencyPreferencesRepository from '../Repositories/ICurrencyPreferencesRepository';
-import IUpdateCurrencyPreferenceDTO from '../DTOs/IUpdateCurrencyPreferenceDTO';
+import IUpsertCurrencyPreferenceDTO from '../DTOs/IUpsertCurrencyPreferenceDTO';
 
 @injectable()
 class UpdateCurrencyPreferenceService {
@@ -16,7 +16,7 @@ class UpdateCurrencyPreferenceService {
     user_id,
     currency_id,
     ...data
-  }: IUpdateCurrencyPreferenceDTO): Promise<CurrencyPreference> {
+  }: IUpsertCurrencyPreferenceDTO): Promise<CurrencyPreference> {
     const currencyPreference = await this.currencyPreferencesRepository.find(
       user_id,
       currency_id,
