@@ -19,6 +19,7 @@ customCurrenciesRoutes.post(
       alias: Joi.string().required(),
       dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
+      favorite: Joi.boolean(),
     },
   }),
   customCurrenciesController.create,
@@ -31,6 +32,7 @@ customCurrenciesRoutes.put(
       alias: Joi.string().required(),
       dollar_rate: Joi.number().positive().required(),
       format: Joi.string().required(),
+      favorite: Joi.boolean(),
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
