@@ -11,14 +11,14 @@ class CurrenciesController {
     _: NextFunction,
   ): Promise<Response> {
     const { user } = request;
-    const { sortBy } = request.query;
+    const { sort_by } = request.query;
     const id = user && user.id ? user.id : '';
 
     const indexCurrencies = container.resolve(IndexCurrenciesService);
 
     const currencies = await indexCurrencies.execute(
       id,
-      typeof sortBy === 'string' ? sortBy : undefined,
+      typeof sort_by === 'string' ? sort_by : undefined,
     );
 
     return response.json(currencies);

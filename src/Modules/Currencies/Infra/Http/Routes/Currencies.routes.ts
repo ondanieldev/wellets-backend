@@ -10,7 +10,15 @@ const currenciesController = new CurrenciesController();
 
 // Private routes
 currenciesRoutes.use(authController.on);
-currenciesRoutes.get('/', currenciesController.index);
+currenciesRoutes.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      sort_by: Joi.string(),
+    },
+  }),
+  currenciesController.index,
+);
 currenciesRoutes.put(
   '/:id',
   celebrate({
