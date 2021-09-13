@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { container } from 'tsyringe';
 
 import IndexCurrenciesService from 'Modules/Currencies/Services/IndexCurrenciesService';
-import CreateOrUpdateCurrencyPreferenceService from 'Modules/CurrencyPreferences/Services/CreateOrUpdateCurrencyPreferenceService';
+import UpsertCurrencyPreferenceService from 'Modules/CurrencyPreferences/Services/UpsertCurrencyPreferenceService';
 
 class CurrenciesController {
   public async index(
@@ -18,7 +18,7 @@ class CurrenciesController {
 
     const currencies = await indexCurrencies.execute(
       id,
-      (typeof sortBy === 'string' && sortBy) || undefined,
+      typeof sortBy === 'string' ? sortBy : undefined,
     );
 
     return response.json(currencies);
@@ -34,11 +34,11 @@ class CurrenciesController {
 
     const { favorite } = request.body;
 
-    const createOrUpdateCurrencyPreference = container.resolve(
-      CreateOrUpdateCurrencyPreferenceService,
+    const upsertCurrencyPreferenceService = container.resolve(
+      UpsertCurrencyPreferenceService,
     );
 
-    const currencyPreference = await createOrUpdateCurrencyPreference.execute({
+    const currencyPreference = await upsertCurrencyPreferenceService.execute({
       user_id: user.id,
       currency_id: id,
       favorite,

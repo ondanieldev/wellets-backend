@@ -47,13 +47,13 @@ class CustomCurrenciesController {
       format,
     });
 
-    const currency_preference = await createCurrencyPreference.execute({
+    const currencyPreference = await createCurrencyPreference.execute({
       user_id: id,
       currency_id: currency.id,
       favorite: !!favorite,
     });
 
-    currency.favorite = currency_preference.favorite;
+    currency.favorite = currencyPreference.favorite;
 
     return response.json(currency);
   }
@@ -81,13 +81,13 @@ class CustomCurrenciesController {
       id,
     });
 
-    const currency_preference = await updateCurrencyPreference.execute({
+    const currencyPreference = await updateCurrencyPreference.execute({
       user_id: user.id,
       currency_id: currency.id,
       favorite: !!favorite,
     });
 
-    currency.favorite = currency_preference.favorite;
+    currency.favorite = currencyPreference.favorite;
 
     return response.json(currency);
   }
