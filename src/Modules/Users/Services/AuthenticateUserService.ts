@@ -1,4 +1,4 @@
-import { injectable, inject } from 'tsyringe';
+import { injectable, inject, container } from 'tsyringe';
 
 import AppError from 'Shared/Errors/AppError';
 import IHashProvider from 'Shared/Containers/HashProvider/Models/IHashProvider';
@@ -6,6 +6,7 @@ import IAuthProvider from 'Shared/Containers/AuthProvider/Models/IAuthProvider';
 import User from '../Infra/TypeORM/Entities/User';
 import ICreateUserDTO from '../DTOs/ICreateUserDTO';
 import IUsersRepository from '../Repositories/IUsersRepository';
+import CreateUserSettingsService from './CreateUserSettingsService';
 
 @injectable()
 class AuthenticateUserService {
@@ -43,6 +44,9 @@ class AuthenticateUserService {
     Object.assign(user, { token });
 
     await this.usersRepository.save(user);
+
+    const createUserSettings = container.resolve(CreateUserSettingsService);
+    await createUserSettings.execute({ user_id: user.id });
 
     return user;
   }

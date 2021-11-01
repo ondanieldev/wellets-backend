@@ -62,6 +62,9 @@ If [Wellets](https://wellets.ondaniel.com.br/) currently does not have a certain
 | POST   | /users                 | User sign up                                |
 | POST   | /users/sessions        | User sign in                                |
 | DELETE | /users/sessions        | User sign out                               |
+| GET    | /users/settings        | Get user settings                           |
+| POST   | /users/settings        | Create user settings                        |
+| PUT    | /users/settings        | Update user settings                        |
 | GET    | /wallets               | Index user wallets                          |
 | POST   | /wallets               | Create a wallet                             |
 | DELETE | /wallets               | Delete a wallet                             |

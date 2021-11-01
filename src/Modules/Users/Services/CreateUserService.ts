@@ -1,10 +1,11 @@
-import { injectable, inject } from 'tsyringe';
+import { injectable, inject, container } from 'tsyringe';
 
 import IHashProvider from 'Shared/Containers/HashProvider/Models/IHashProvider';
 import AppError from 'Shared/Errors/AppError';
 import User from '../Infra/TypeORM/Entities/User';
 import ICreateUserDTO from '../DTOs/ICreateUserDTO';
 import IUsersRepository from '../Repositories/IUsersRepository';
+import CreateUserSettingsService from './CreateUserSettingsService';
 
 @injectable()
 class CreateUserService {
@@ -31,6 +32,9 @@ class CreateUserService {
       email: parsedEmail,
       password: hashedPassword,
     });
+
+    const createUserSettings = container.resolve(CreateUserSettingsService);
+    await createUserSettings.execute({ user_id: user.id });
 
     return user;
   }
